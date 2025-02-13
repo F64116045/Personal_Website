@@ -1,0 +1,10 @@
+function Projects() {
+  return (
+    <div>
+      <h1>Projects</h1>
+      <p>Projects will go here</p>
+    </div>
+  );
+}
+
+export default Projects;

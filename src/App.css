@@ -1,0 +1,43 @@
+body {
+  background-color: black; /* 更接近黑色的深藍色 */
+  color: white; /* 文字顏色改為白色 */
+}
+
+.head {
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  font-size:60px;
+}
+
+.welcome{
+
+  display: flex;           /* 使用 flexbox 佈局 */
+  flex-direction: column;  /* 設定排列方向為垂直 */
+  align-items: center;     /* 項目在水平方向上居中 */
+}
+
+/* App.css 或者其他你的樣式文件 */
+
+/* 設置navbar容器 */
+.navbar {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+}
+
+/* 設置每個按鈕樣式 */
+.nav-button {
+  background-color: blue; /* 藍色背景 */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-decoration: none; /* 去除預設的下劃線 */
+  margin: 0 5px; /* 按鈕之間的間隔 */
+  border-radius: 0px;
+  font-size: 16px;
+  transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
+}
+
+/* 鼠標懸停效果 */
+.nav-button:hover {
+  background-color: #0056b3; /* 當鼠標懸停時變成深藍色 */
+}

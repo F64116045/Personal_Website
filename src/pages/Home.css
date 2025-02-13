@@ -1,0 +1,33 @@
+.head {
+    display: flex;
+    justify-content: center; /* 水平置中 */
+    font-size:60px;
+ }
+
+ .welcome{
+
+    display: flex;           /* 使用 flexbox 佈局 */
+    flex-direction: column;  /* 設定排列方向為垂直 */
+    align-items: center;     /* 項目在水平方向上居中 */
+ }
+ .text{
+    margin-top: 100px;
+    display: flex;           /* 使用 flexbox 佈局 */
+    flex-direction: column;  /* 設定排列方向為垂直 */
+    align-items: center;     /* 項目在水平方向上居中 */
+    font-size: 20px;
+ }
+
+ .contact{
+    margin-top: 100px;
+    display: flex;           /* 使用 flexbox 佈局 */
+    flex-direction: column;  /* 設定排列方向為垂直 */
+    align-items: center;     /* 項目在水平方向上居中 */
+ }
+
+ footer{
+    display: flex;           /* 使用 flexbox 佈局 */
+    flex-direction: column;  /* 設定排列方向為垂直 */
+    align-items: center;     /* 項目在水平方向上居中 */
+ }
+  
