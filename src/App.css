@@ -1,7 +1,13 @@
 body {
-  background-color: black; /* 更接近黑色的深藍色 */
-  color: white; /* 文字顏色改為白色 */
+  background-color: black; /* 黑色背景 */
+  color: white; /* 文字顏色為白色 */
+  animation: gradientAnimation 20s ease infinite;
+  height: 100vh;
+  margin: 0;
+  position: relative;  /* 確保 body 元素不會影響粒子顯示 */
+  z-index: 1; /* 設置較高的 z-index */
 }
+
 
 .head {
   display: flex;
@@ -31,7 +37,7 @@ body {
   justify-content: center;
   width: 50px;
   height: 20px;
-  background-color: rgb(32, 80, 169); /* 藍色背景 */
+  background: linear-gradient(45deg, #007bff, #0056b3);
   color: white;
   font-weight: bold;
   padding: 10px 20px;
@@ -40,9 +46,47 @@ body {
   border-radius: 12px;
   font-size: 16px;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
+  animation: floating 3s ease-in-out infinite;
 }
 
 /* 鼠標懸停效果 */
 .nav-button:hover {
-  background-color: blue; /* 當鼠標懸停時變成深藍色 */
+  background: blue;
+  transform: scale(1.07);
+  animation: none; /* 移除浮動動畫，避免影響 hover */
 }
+
+.nav-button:active{
+  transform: scale(0.9);
+}
+
+
+/* 定義動畫 */
+@keyframes gradientAnimation {
+  0% {
+    background: black;
+  }
+  50% {
+    background: rgb(41, 45, 50);
+  }
+  100% {
+    background: rgb(2, 3, 3);
+  }
+}
+
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+

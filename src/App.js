@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import bimg from './img/bimg.webp';
+import ParticleBackground from './pages/ParticlesBackground';
 
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";

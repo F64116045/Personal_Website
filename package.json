@@ -3,13 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tsparticles/engine": "^3.8.1",
+    "@tsparticles/plugin-absorbers": "^3.8.1",
+    "@tsparticles/plugin-emitters": "^3.8.1",
+    "@tsparticles/plugin-emitters-shape-circle": "^3.8.1",
+    "@tsparticles/plugin-emitters-shape-square": "^3.8.1",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/updater-destroy": "^3.8.1",
+    "@tsparticles/updater-roll": "^3.8.1",
     "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
+    "react-tsparticles": "^2.12.2",
     "socket.io-client": "^4.8.1",
+    "tsparticles": "^3.8.1",
     "web-vitals": "^4.2.4"
   },
   "scripts": {
