@@ -26,18 +26,23 @@ body {
 
 /* 設置每個按鈕樣式 */
 .nav-button {
-  background-color: blue; /* 藍色背景 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 20px;
+  background-color: rgb(32, 80, 169); /* 藍色背景 */
   color: white;
   font-weight: bold;
   padding: 10px 20px;
   text-decoration: none; /* 去除預設的下劃線 */
   margin: 0 5px; /* 按鈕之間的間隔 */
-  border-radius: 0px;
+  border-radius: 12px;
   font-size: 16px;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
 }
 
 /* 鼠標懸停效果 */
 .nav-button:hover {
-  background-color: #0056b3; /* 當鼠標懸停時變成深藍色 */
+  background-color: blue; /* 當鼠標懸停時變成深藍色 */
 }

@@ -12,8 +12,7 @@ function App() {
   return (
     <div>
         <header>
-          <h1 className="head">Huang Shou's Personal Website</h1>
-          <hr></hr>
+          <h1 className="head">Huang Shuo's Personal Website</h1>
         </header>
 
         <body>
@@ -25,7 +24,6 @@ function App() {
               <Link to="/projects" className="nav-button">專案</Link>
               <Link to="/chat" className="nav-button">傳訊息</Link>
             </nav>
-            <hr></hr>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
