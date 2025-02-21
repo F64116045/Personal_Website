@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.class{
+    border: 1px solid white;  /* ✅ 修正：加入 `border` 屬性 */
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    text-align: left;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgb(52, 51, 53);
+    
+    padding: 10px;
+}
+
+.class:hover{
+    transform: scale(1.01); 
+}

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Chatroom from "./pages/Chatroom";
+import Course from "./pages/Course";
 
 function App() {
   return (
@@ -23,11 +24,13 @@ function App() {
             <nav className="navbar">
               <Link to="/" className="nav-button">首頁</Link>
               <Link to="/projects" className="nav-button">專案</Link>
+              <Link to="/course" className="nav-button">修課</Link>
               <Link to="/chat" className="nav-button">傳訊息</Link>
             </nav>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/course" element={<Course />} />
               <Route path="/chat" element={<Chatroom />} />
             </Routes>
           </Router>

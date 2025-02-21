@@ -13,6 +13,7 @@ body {
   display: flex;
   justify-content: center; /* 水平置中 */
   font-size:60px;
+  animation: floatinghead 5s ease-in-out infinite;
 }
 
 .welcome{
@@ -49,6 +50,7 @@ body {
   animation: floating 3s ease-in-out infinite;
 }
 
+
 /* 鼠標懸停效果 */
 .nav-button:hover {
   background: blue;
@@ -77,16 +79,35 @@ body {
 
 @keyframes floating {
   0% {
-    transform: translateY(0px);
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(5px, -5px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translate(-5px, -10px);
+  }
+  75% {
+    transform: translate(-5px, 5px);
   }
   100% {
-    transform: translateY(0px);
+    transform: translate(0px, 0px);
   }
 }
 
 
 
 
+
+
+@keyframes floatinghead {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
