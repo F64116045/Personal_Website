@@ -4,18 +4,86 @@
     font-size:60px;
  }
 
- .welcome{
+ .welcome {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between; /* 使句子間的間隔永遠相等 */
+   width: 50%; /* 設定寬度，讓它只占視窗的一部分 */
+   overflow: hidden; /* 隱藏超出區域的內容 */
+   margin: 0 auto; /* 讓它水平置中 */
+   font-size: 25px;
+   font-weight: 700;
+   
+}
 
-    display: flex;           /* 使用 flexbox 佈局 */
-    flex-direction: column;  /* 設定排列方向為垂直 */
-    align-items: center;     /* 項目在水平方向上居中 */
- }
+
+
+.welcome-content1 {
+   display: inline-block;
+   white-space: nowrap;
+   animation: welcome1 15s linear infinite;
+}
+.welcome-content2 {
+   display: inline-block;
+   white-space: nowrap;
+   animation: welcome2 15s linear infinite;
+}
+.welcome-content3 {
+   display: inline-block;
+   white-space: nowrap;
+   animation: welcome3 15s linear infinite;
+}
+
+
+
+p span {
+   margin: 0 70px; /* 調整每個 span 之間的間隔 */
+}
+
+
+
+@keyframes welcome1 {
+   0% {
+     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
+   }
+   100% {
+     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
+   }
+}
+
+@keyframes welcome2 {
+   0% {
+     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
+   }
+   100% {
+     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
+   }
+}
+@keyframes welcome3 {
+   0% {
+     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
+   }
+   100% {
+     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
+   }
+}
+
+
+
+
+ 
+ 
+ 
+ 
+
+
  .text{
     margin-top: 100px;
     display: flex;           /* 使用 flexbox 佈局 */
     flex-direction: column;  /* 設定排列方向為垂直 */
     align-items: center;     /* 項目在水平方向上居中 */
-    font-size: 20px;
+    font-weight: 700;
+    font-size:27px;
  }
 
  .contact{
@@ -31,3 +99,24 @@
     align-items: center;     /* 項目在水平方向上居中 */
  }
   
+ .icon {
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   border-width: 2px;
+   border-style: solid; /* 這行是關鍵！ */
+   border-color: #67a5e7;
+   background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+.icon:hover {
+   background: rgb(37, 92, 255);
+   transform: scale(1.07);
+ }
+
+.iconContainer{
+   display: flex;
+   justify-content: center;
+   gap: 50px
+}
+ 

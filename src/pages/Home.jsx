@@ -1,6 +1,8 @@
 // src/pages/Home.js
 import React from "react";
 import './Home.css';
+import githubIcon from '../img/Github.png';
+import gmailIcon from '../img/Email.png';
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -8,8 +10,20 @@ const Home = () => {
     <div>
 
       <main>
-        <section class ="welcome">
-          <h2>歡迎來到我的網站！</h2>
+        <div className="welcome">
+          <p className="welcome-content1"><span> 🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站! </p>
+          <p className="welcome-content2"><span>🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站!  </p>
+          <p className="welcome-content3"><span>🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站!  </p>   
+        </div>
+
+
+        <section className="iconContainer">
+          <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
+            <img src={githubIcon} alt="GitHub" className="icon"/>
+          </a>
+          <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
+            <img src={gmailIcon} alt="Mail" className="icon"/>
+          </a>
         </section>
 
         <section class ="text">

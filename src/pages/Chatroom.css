@@ -11,6 +11,7 @@
     overflow: hidden; /* 避免內容溢出 */
     margin-top: 50px;
   }
+
   
   .messages-container {
     flex: 1; /* 讓訊息區自動填滿 */

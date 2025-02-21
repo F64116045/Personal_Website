@@ -1,11 +1,10 @@
 body {
-  background-color: black; /* 黑色背景 */
   color: white; /* 文字顏色為白色 */
-  animation: gradientAnimation 20s ease infinite;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   position: relative;  /* 確保 body 元素不會影響粒子顯示 */
   z-index: 1; /* 設置較高的 z-index */
+  animation: gradientAnimation 9s infinite;
 }
 
 
@@ -13,7 +12,9 @@ body {
   display: flex;
   justify-content: center; /* 水平置中 */
   font-size:60px;
-  animation: floatinghead 5s ease-in-out infinite;
+  animation: floatinghead 4s ease-in-out infinite;
+  color:white;
+
 }
 
 .welcome{
@@ -21,6 +22,7 @@ body {
   display: flex;           /* 使用 flexbox 佈局 */
   flex-direction: column;  /* 設定排列方向為垂直 */
   align-items: center;     /* 項目在水平方向上居中 */
+  text-shadow: 0 0 2px #007bff, 0 0 5px #007bff, 0 0 8px #007bff, 0 0 10px #007bff;
 }
 
 /* App.css 或者其他你的樣式文件 */
@@ -28,6 +30,7 @@ body {
 /* 設置navbar容器 */
 .navbar {
   display: flex;
+  flex-direction: row;
   justify-content: center; /* 水平居中 */
 }
 
@@ -36,18 +39,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 20px;
+  width: 100px;
+  height: 40px;
   background: linear-gradient(45deg, #007bff, #0056b3);
   color: white;
-  font-weight: bold;
+  font-weight: 1000;
   padding: 10px 20px;
   text-decoration: none; /* 去除預設的下劃線 */
-  margin: 0 5px; /* 按鈕之間的間隔 */
+  margin: 0 15px; /* 按鈕之間的間隔 */
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 30px;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
   animation: floating 3s ease-in-out infinite;
+  border: solid 3px #6bb2ff;
+
+  text-shadow:
+      2px 2px 0 #000,  /* 左上 */
+      -2px -2px 0 #000, /* 右下 */
+      2px -2px 0 #000,  /* 右上 */
+      -2px 2px 0 #000;  /* 左下 */
+
 }
 
 
@@ -66,15 +77,22 @@ body {
 /* 定義動畫 */
 @keyframes gradientAnimation {
   0% {
-    background: black;
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
+    background-size: 100% 100%; /* 初始時背景會更大 */
+    background-position: center center; /* 設定背景以螢幕中心為基準 */
   }
   50% {
-    background: rgb(41, 45, 50);
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(5, 121, 222) 100%);
+    background-size: 120% 120%; /* 背景縮小 */
+    background-position: center center; /* 繼續以中心為基準 */
   }
   100% {
-    background: rgb(2, 3, 3);
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
+    background-size: 100% 100%; /* 背景恢復原來的大小 */
+    background-position: center center; /* 確保背景縮放的中心不變 */
   }
 }
+
 
 
 @keyframes floating {
