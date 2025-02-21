@@ -8,13 +8,26 @@ body {
 }
 
 
-.head {
+.header {
   display: flex;
   justify-content: center; /* 水平置中 */
-  font-size:60px;
-  animation: floatinghead 4s ease-in-out infinite;
+  font-size: 60px;
+  animation: floatinghead 3s ease-in-out infinite;
   color:white;
+  height: 100%;
+  width: 1000px;
+  margin-right: 150px;
+}
+.head{
 
+  background: rgba(5, 93, 255, 0.5);  /* 背景顏色 */
+  border-radius: 10px;  /* 圓角效果 */
+  filter: blur(8px);  /* 模糊背景 */
+}
+
+.head-container{
+  display: flex;
+  justify-content: center;
 }
 
 .welcome{
@@ -39,18 +52,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
-  height: 40px;
+  width: 90px;
+  height: 35px;
   background: linear-gradient(45deg, #007bff, #0056b3);
   color: white;
   font-weight: 1000;
   padding: 10px 20px;
   text-decoration: none; /* 去除預設的下劃線 */
-  margin: 0 15px; /* 按鈕之間的間隔 */
+  margin: 50px 15px; /* 按鈕之間的間隔 */
   border-radius: 12px;
   font-size: 30px;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
-  animation: floating 3s ease-in-out infinite;
+  /*animation: floating 3s ease-in-out infinite;*/
   border: solid 3px #6bb2ff;
 
   text-shadow:
@@ -128,4 +141,16 @@ body {
   100% {
     transform: translateY(0px);
   }
+}
+
+hr{
+  border: 3px solid rgb(0, 134, 252);
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px 9px rgba(44, 148, 217, 0.7); /* 發光效果 */
+}
+
+.menu-container{
+  display: flex;
+  flex-direction: row;
+  height:120px;
 }
