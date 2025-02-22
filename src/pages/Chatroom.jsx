@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useEffect, useRef } from 'react';
+import io from "socket.io-client"; // 引入 socket.io-client
 import './Chatroom.css';
+
+const socket = io("http://localhost:3000"); // 連接到伺服器
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]);
@@ -14,11 +17,25 @@ const Chatroom = () => {
   // 發送訊息
   const handleSendMessage = () => {
     if (input.trim() === "") return;
-    setMessages([...messages, { text: input, sender: "user" }]);
+    const message = { text: input, sender: "user" };
+    setMessages((prevMessages) => [...prevMessages, message]);
+    socket.emit("chatMessage", message.text);  // 發送訊息到伺服器
     setInput(""); // 清空輸入框
   };
+  
 
   const messagesEndRef = useRef(null); // 創建一個引用來追蹤訊息區底部
+
+  useEffect(() => {
+    socket.on("chatMessage", (message) => {
+      setMessages((prevMessages) => [...prevMessages, { text: message, sender: "server" }]);
+    });
+  
+    // 清理當組件卸載時的事件監聽器
+    return () => {
+      socket.off("chatMessage");
+    };
+  }, []);
 
   useEffect(() => {
     // 每當訊息變動，滾動到底部
