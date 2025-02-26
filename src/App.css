@@ -5,7 +5,10 @@ body {
   position: relative;  /* 確保 body 元素不會影響粒子顯示 */
   z-index: 1; /* 設置較高的 z-index */
   animation: gradientAnimation 9s infinite;
+  backdrop-filter: blur(155px)
 }
+
+
 
 
 .header {

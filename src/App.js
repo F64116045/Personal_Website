@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import bimg from './img/bimg.webp';
+import bimg from './img/BC.webp';
 import ParticleBackground from './pages/ParticlesBackground';
 
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
@@ -35,7 +35,7 @@ function AppContent() {
   }, [location]);
 
   return (
-    <div className="app-container">
+    <div className="app-container" >
       <div className="menu-container">
         <div className="head-container">
           <h1 className="header">

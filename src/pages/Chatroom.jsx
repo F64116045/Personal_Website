@@ -1,82 +1,168 @@
-import React, { useState } from "react";
-import { useEffect, useRef } from 'react';
-import io from "socket.io-client"; // 引入 socket.io-client
+import React, { useState, useEffect, useRef } from "react";
 import './Chatroom.css';
-
-const socket = io("http://localhost:3000"); // 連接到伺服器
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-
-  // 處理輸入變更
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  // 發送訊息
-  const handleSendMessage = () => {
-    if (input.trim() === "") return;
-    const message = { text: input, sender: "user" };
-    setMessages((prevMessages) => [...prevMessages, message]);
-    socket.emit("chatMessage", message.text);  // 發送訊息到伺服器
-    setInput(""); // 清空輸入框
-  };
-  
-
-  const messagesEndRef = useRef(null); // 創建一個引用來追蹤訊息區底部
+  const [token, setToken] = useState(localStorage.getItem("token") || ""); // 儲存登入 Token
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    socket.on("chatMessage", (message) => {
-      setMessages((prevMessages) => [...prevMessages, { text: message, sender: "server" }]);
-    });
-  
-    // 清理當組件卸載時的事件監聽器
-    return () => {
-      socket.off("chatMessage");
-    };
-  }, []);
+    if (token) {
+      fetchMessages();
+    }
+  }, [token]);
 
   useEffect(() => {
-    // 每當訊息變動，滾動到底部
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]); // 當 messages 改變時觸發
+  }, [messages]);
+
+  const fetchMessages = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/messages", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Failed to fetch messages");
+      const data = await res.json();
+      setMessages(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSendMessage = async () => {
+    if (input.trim() === "") return;
+
+    try {
+      const res = await fetch("http://localhost:5000/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: input }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      const newMessage = await res.json();
+      setMessages([...messages, newMessage]);
+      setInput("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleAuth = async (endpoint, userData) => {
+    try {
+      const res = await fetch(`http://localhost:5000/${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      if (!res.ok) throw new Error(`${endpoint} failed`);
+
+      const data = await res.json();
+      if (endpoint === "login") {
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        setShowLoginModal(false);
+        fetchMessages(); // 取得訊息
+      } else {
+        setShowRegisterModal(false);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    localStorage.removeItem("token");
+    setMessages([]);
+  };
 
   return (
     <div className="container">
+      {!token ? (
+        <div className="login-container">
+          <button onClick={() => setShowLoginModal(true)}>登入</button>
+          <button onClick={() => setShowRegisterModal(true)}>註冊</button>
+        </div>
+      ) : (
+        <button onClick={handleLogout} className="logout-button">登出</button>
+      )}
+
       <div className="chatroom">
-        {/* 訊息列表 */}
+        {showRegisterModal && (
+          <AuthModal
+            title="註冊"
+            onSubmit={(userData) => handleAuth("register", userData)}
+            onClose={() => setShowRegisterModal(false)}
+          />
+        )}
+
+        {showLoginModal && (
+          <AuthModal
+            title="登入"
+            onSubmit={(userData) => handleAuth("login", userData)}
+            onClose={() => setShowLoginModal(false)}
+          />
+        )}
+
         <div className="messages-container">
           {messages.map((msg, index) => (
-            <div key={index} className={`p-2 ${msg.sender === "user" ? "text-right" : "text-left"}`}>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: msg.text.replace(/\n/g, "<br/>") /* 替換換行符號為 <br> */
-                }}
-              ></span>
+            <div key={index} className="message">
+              <span>{msg.sender}: {msg.text}</span>
             </div>
           ))}
           <div ref={messagesEndRef} />
-        </div >
-
-  
-        {/* 輸入框 */}
-        <div className="input-container">
-          <textarea
-            type="text"
-            className="inputbox"
-            value={input}
-            onChange={handleInputChange}
-            placeholder="輸入訊息..."
-          />
-          <button className="send-button" onClick={handleSendMessage}>
-            送出
-          </button>
         </div>
+
+        {token && (
+          <div className="input-container">
+            <textarea
+              className="inputbox"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="輸入訊息..."
+            />
+            <button className="send-button" onClick={handleSendMessage}>送出</button>
+          </div>
+        )}
       </div>
     </div>
   );
-  
+};
+
+const AuthModal = ({ title, onSubmit, onClose }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <h2>{title}</h2>
+        <input
+          type="text"
+          placeholder="輸入用戶名"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="輸入密碼"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={() => onSubmit({ username, password })}>{title}</button>
+        <button onClick={onClose}>關閉</button>
+      </div>
+    </div>
+  );
 };
 
 export default Chatroom;
