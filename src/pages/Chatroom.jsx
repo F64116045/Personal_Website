@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { io } from "socket.io-client";
 import './Chatroom.css';
+import { jwtDecode } from 'jwt-decode';
+
+const socket = io("http://localhost:5000"); // ✅ 連線到 WebSocket
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]);
@@ -19,6 +23,23 @@ const Chatroom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("WebSocket connected:", socket.id); // 確認連線
+    });
+  
+    socket.on("receive_message", (message) => {
+      console.log("📥 收到訊息:", message);
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  
+    return () => socket.off("receive_message"); // 清除監聽，避免重複綁定
+  }, []);
+  
+
+
+
+
   const fetchMessages = async () => {
     try {
       const res = await fetch("http://localhost:5000/messages", {
@@ -34,26 +55,16 @@ const Chatroom = () => {
 
   const handleSendMessage = async () => {
     if (input.trim() === "") return;
-
-    try {
-      const res = await fetch("http://localhost:5000/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ text: input }),
-      });
-
-      if (!res.ok) throw new Error("Failed to send message");
-
-      const newMessage = await res.json();
-      setMessages([...messages, newMessage]);
-      setInput("");
-    } catch (err) {
-      console.error(err);
-    }
+  
+    const decodedToken = jwtDecode(token);  // 使用 jwtDecode 函數
+    const userId = decodedToken.userId;
+  
+    const messageData = { text: input, userId };  // 包含 userId
+    socket.emit("send_message", messageData); // 透過 WebSocket 發送訊息
+    setInput(""); // 清空輸入框
   };
+  
+  
 
   const handleAuth = async (endpoint, userData) => {
     try {
