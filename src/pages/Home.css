@@ -100,18 +100,32 @@ p span {
  }
   
  .icon {
-   width: 80px;
-   height: 80px;
+   width: 12vh;
+   height: 12vh;
    border-radius: 50%;
    border-width: 2px;
    border-style: solid; /* 這行是關鍵！ */
    border-color: #67a5e7;
-   background: linear-gradient(45deg, #007bff, #0056b3);
+   background: linear-gradient(20deg, #00208a, #007bff);
+   animation: floatinghead 4s ease-in-out infinite;
 }
 
+@keyframes floatinghead {
+   0% {
+     transform: translateY(15px);
+   }
+   50% {
+     transform: translateY(-10px);
+   }
+   100% {
+     transform: translateY(15px);
+   }
+ }
+
 .icon:hover {
-   background: rgb(37, 92, 255);
-   transform: scale(1.07);
+   animation: none;
+   background: rgb(96, 182, 238);
+   transform: scale(1.1);
  }
 
 .iconContainer{
@@ -119,4 +133,48 @@ p span {
    justify-content: center;
    gap: 50px
 }
+ 
+ 
+ .greeting-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 50vh;
+ }
+ 
+ .greeting {
+   display: inline-block;
+   overflow: hidden;
+   white-space: nowrap;
+   border-right: 2px solid; /* 光標效果 */
+   font-size: 5em;
+   width: 13em;
+
+   animation: typing 6s steps(13) infinite, caret 1s steps(1) infinite;
+   font-weight: bolder;
+ }
+ 
+ /* 打字動畫 */
+ @keyframes typing {
+   0%{
+      width: 0;
+   }
+
+   50%{
+      width: 13em;
+   }
+
+   100%{
+      width: 13em;
+   }
+ }
+ 
+ @keyframes caret {
+   50% { border-color: transparent; }
+ }
+
+ 
+ 
+
+ 
  

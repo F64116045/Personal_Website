@@ -1,51 +1,39 @@
 body {
   color: white; /* 文字顏色為白色 */
+  background-color: #393d3f;
   height: 100%;
   margin: 0;
   position: relative;  /* 確保 body 元素不會影響粒子顯示 */
   z-index: 1; /* 設置較高的 z-index */
-  animation: gradientAnimation 9s infinite;
+  /*animation: gradientAnimation 9s infinite;*/
   backdrop-filter: blur(155px)
 }
 
-
+.content{
+  background: linear-gradient(75deg, #000000, #000000, #000000, #080808);
+}
 
 
 .header {
   display: flex;
   justify-content: center; /* 水平置中 */
   font-size: 60px;
-  animation: floatinghead 3s ease-in-out infinite;
-  color:white;
   height: 100%;
   width: 1000px;
   margin-right: 150px;
-
-  text-shadow:
-      2px 2px 0 #007bff,  /* 左上 */
-      -2px -2px 0 #007bff, /* 右下 */
-      2px -2px 0 #007bff,  /* 右上 */
-      -2px 2px 0 #007bff;  /* 左下 */
-}
-.head{
-
-  background: rgba(5, 93, 255, 0.5);  /* 背景顏色 */
-  border-radius: 10px;  /* 圓角效果 */
-  filter: blur(8px);  /* 模糊背景 */
 }
 
 .head-container{
   display: flex;
   justify-content: center;
-  background-color: #000;
+  font-weight: bolder;
 }
 
 .welcome{
-
   display: flex;           /* 使用 flexbox 佈局 */
   flex-direction: column;  /* 設定排列方向為垂直 */
   align-items: center;     /* 項目在水平方向上居中 */
-  text-shadow: 0 0 2px #007bff, 0 0 5px #007bff, 0 0 8px #007bff, 0 0 10px #007bff;
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
 }
 
 /* App.css 或者其他你的樣式文件 */
@@ -62,7 +50,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90px;
+  width: 110px;
   height: 35px;
   background: linear-gradient(45deg, #007bff, #0056b3);
   color: white;
@@ -73,28 +61,46 @@ body {
   border-radius: 12px;
   font-size: 30px;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
-  /*animation: floating 3s ease-in-out infinite;*/
-  border: solid 3px #6bb2ff;
-
+  border: solid 3px #02254a;
   text-shadow:
-      2px 2px 0 #000,  /* 左上 */
-      -2px -2px 0 #000, /* 右下 */
-      2px -2px 0 #000,  /* 右上 */
-      -2px 2px 0 #000;  /* 左下 */
-
+    2px 2px 0 #000,  /* 左上 */
+    -2px -2px 0 #000, /* 右下 */
+    2px -2px 0 #000,  /* 右上 */
+    -2px 2px 0 #000;  /* 左下 */
+  opacity: 0.5;
 }
 
+/* 當前頁面按鈕高亮 */
+.nav-button.active {
+  background: linear-gradient(45deg, #0634cd, #0056b3);
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  opacity: 1; /* 高亮時不透明 */
+}
 
 /* 鼠標懸停效果 */
 .nav-button:hover {
   background: blue;
   transform: scale(1.07);
   animation: none; /* 移除浮動動畫，避免影響 hover */
+  opacity: 1;
 }
 
-.nav-button:active{
+/* 被點擊時的效果 */
+.nav-button:active {
   transform: scale(0.9);
 }
+
+/* 高亮按鈕的懸停效果 */
+.nav-button.active:hover {
+  background: #2980b9;  /* 當前頁面按鈕懸停的顏色 */
+  transform: scale(1.07); /* 懸停效果 */
+}
+
+/* 高亮按鈕的點擊效果 */
+.nav-button.active:active {
+  transform: scale(0.9);
+}
+
 
 
 /* 定義動畫 */
@@ -146,24 +152,24 @@ body {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-20px);
+    transform: translateY(-15px);
   }
   100% {
     transform: translateY(0px);
   }
 }
 
-hr{
-  border: 3px solid rgb(0, 134, 252);
-  margin-bottom: 20px;
-  margin-top: 0%;
-  width: 100%;
-  box-shadow: 0 0 10px 9px rgba(44, 148, 217, 0.7); /* 發光效果 */
-}
 
-.menu-container{
+
+.menu-container {
   display: flex;
   flex-direction: row;
-  height:120px;
-  background-color: #000;
+  height: 120px;
+  padding: 2px;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.219);
+  background: linear-gradient(45deg, #000000, #1c3550, #000000);
+  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.5), -5px -5px 15px rgba(0, 0, 0, 0.3); /* 更強的陰影效果 */
 }
+
+
+

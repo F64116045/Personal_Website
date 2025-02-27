@@ -26,6 +26,10 @@ const Home = () => {
           </a>
         </section>
 
+        <div class="greeting-container">
+          <p class="greeting">Currently debugging life… </p>
+        </div>
+
         <section class ="text">
           <h2>關於我</h2>
           <p>我是黃朔</p>

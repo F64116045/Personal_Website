@@ -3,12 +3,13 @@ import './App.css';
 import bimg from './img/BC.webp';
 import ParticleBackground from './pages/ParticlesBackground';
 
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { useEffect } from 'react';
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Chatroom from "./pages/Chatroom";
 import Course from "./pages/Course";
+
 
 function App() {
   return (
@@ -39,19 +40,19 @@ function AppContent() {
       <div className="menu-container">
         <div className="head-container">
           <h1 className="header">
-            <h1 className="head"></h1>
-            Huang Shuo's Personal Website
+            <h1 className="headText"></h1>
+             Huang Shuo's Personal Website
           </h1>
         </div>
 
         <nav className="navbar">
-          <Link to="/" className="nav-button">Home</Link>
-          <Link to="/projects" className="nav-button">Projects</Link>
-          <Link to="/course" className="nav-button">Course</Link>
-          <Link to="/chat" className="nav-button">Messages</Link>
+            <NavLink to="/" className="nav-button" activeClassName="active">Home</NavLink>
+            <NavLink to="/projects" className="nav-button" activeClassName="active">Projects</NavLink>
+            <NavLink to="/course" className="nav-button" activeClassName="active">Course</NavLink>
+            <NavLink to="/chat" className="nav-button" activeClassName="active">Messages</NavLink>
         </nav>
       </div>
-      <hr></hr>
+
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />} />
