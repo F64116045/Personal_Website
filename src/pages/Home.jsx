@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
 
       <main>
         <div className="welcome">
@@ -17,7 +17,7 @@ const Home = () => {
           <p className="welcome-content3"><span> Welcome to my personal website!  Stay tuned for updates! </span>  </p>   
         </div>
 
-
+      
         <section className="iconContainer">
           <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
             <img src={githubIcon} alt="GitHub" className="icon"/>

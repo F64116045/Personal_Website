@@ -13,6 +13,7 @@
    font-size: 1.2rem;
    font-weight: 1000;
    opacity: 0.4;
+
 }
 
 
@@ -108,6 +109,7 @@ p span {
    background: linear-gradient(45deg, #00366f, #779fc9, #00448c);
    animation: floatinghead 4s ease-in-out infinite;
    opacity: 0.9;
+
 }
 
 @keyframes floatinghead {
@@ -143,6 +145,23 @@ p span {
    justify-content: center;
    align-items: center;
    height: 50vh;
+
+
+ }
+
+ .greeting-container::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-image: url("../img/backg.png");
+   background-size: 100% 20%;
+   background-position: 50% 40%;
+   background-repeat: no-repeat;
+   opacity: 0.5; /* 這裡是控制背景圖片透明度 */
+   z-index: -1; /* 讓圖片處於元素後方 */
  }
  
  .greeting {
