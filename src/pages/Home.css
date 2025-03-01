@@ -1,7 +1,6 @@
 .head {
     display: flex;
     justify-content: center; /* 水平置中 */
-    font-size:60px;
  }
 
  .welcome {
@@ -11,9 +10,9 @@
    width: 50%; /* 設定寬度，讓它只占視窗的一部分 */
    overflow: hidden; /* 隱藏超出區域的內容 */
    margin: 0 auto; /* 讓它水平置中 */
-   font-size: 25px;
-   font-weight: 700;
-   
+   font-size: 1.2rem;
+   font-weight: 1000;
+   opacity: 0.4;
 }
 
 
@@ -83,11 +82,11 @@ p span {
     flex-direction: column;  /* 設定排列方向為垂直 */
     align-items: center;     /* 項目在水平方向上居中 */
     font-weight: 700;
-    font-size:27px;
+    font-size:1.3rem;
  }
 
  .contact{
-    margin-top: 100px;
+    margin-top: 10vh;
     display: flex;           /* 使用 flexbox 佈局 */
     flex-direction: column;  /* 設定排列方向為垂直 */
     align-items: center;     /* 項目在水平方向上居中 */
@@ -103,11 +102,12 @@ p span {
    width: 12vh;
    height: 12vh;
    border-radius: 50%;
-   border-width: 2px;
+   border-width: 3px;
    border-style: solid; /* 這行是關鍵！ */
-   border-color: #67a5e7;
-   background: linear-gradient(20deg, #00208a, #007bff);
+   border-color: #03448a;
+   background: linear-gradient(45deg, #00366f, #779fc9, #00448c);
    animation: floatinghead 4s ease-in-out infinite;
+   opacity: 0.9;
 }
 
 @keyframes floatinghead {
@@ -126,17 +126,20 @@ p span {
    animation: none;
    background: rgb(96, 182, 238);
    transform: scale(1.1);
+   opacity: 1;
+   box-shadow: 0 0 20px #007bff, 0 0 80px #007bff, 0 0 90px #ffffff, 0 0 10px #007bff;
  }
 
 .iconContainer{
    display: flex;
    justify-content: center;
-   gap: 50px
+   gap: 5vw;
 }
  
  
  .greeting-container {
    display: flex;
+   flex-direction: row;
    justify-content: center;
    align-items: center;
    height: 50vh;
@@ -147,11 +150,16 @@ p span {
    overflow: hidden;
    white-space: nowrap;
    border-right: 2px solid; /* 光標效果 */
-   font-size: 5em;
+   font-size: 5rem;
    width: 13em;
-
+   color:#c2d3da;
    animation: typing 6s steps(13) infinite, caret 1s steps(1) infinite;
    font-weight: bolder;
+   padding: 3%;
+
+
+
+   text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #ffffff, 0 0 15px #333f4d;
  }
  
  /* 打字動畫 */

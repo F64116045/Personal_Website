@@ -6,11 +6,13 @@
 
 .class{
     border: 1px solid white;  /* ✅ 修正：加入 `border` 屬性 */
-    font-size: 30px;
+    width: 27vw;
+    height: 3vh;
+    font-size: 1.1rem;
     font-weight: 600;
     color: white;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 4%;
     border-radius: 10px;
     background-color: rgb(52, 51, 53);
     text-shadow:
@@ -19,9 +21,19 @@
       2px -2px 0 #000,  /* 右上 */
       -2px 2px 0 #000;  /* 左下 */
     
-    padding: 10px;
+    padding: 5%;
+    opacity: 0.65;
+    background: linear-gradient(90deg, #1997b358, #778fa7);
 }
 
 .class:hover{
-    transform: scale(1.01); 
+    opacity: 1;
+    transform: scale(1.1); 
+}
+
+.course-text{
+    font-size: 2rem;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    font-weight: bolder;
 }

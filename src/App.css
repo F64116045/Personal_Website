@@ -10,22 +10,25 @@ body {
 }
 
 .content{
-  background: linear-gradient(75deg, #000000, #000000, #000000, #080808);
+  width: 100vw;
+  background: linear-gradient(90deg, #000000, #020e1cbd, #000c1a);
 }
 
 
 .header {
   display: flex;
-  justify-content: center; /* 水平置中 */
-  font-size: 60px;
-  height: 100%;
-  width: 1000px;
-  margin-right: 150px;
+  align-items: center;
+  font-size: 2.5rem;
+  white-space: nowrap;
+  margin-left: 20%;
+  color:#77b6f9;
+  text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #000000, 0 0 10px #000000;
 }
 
 .head-container{
   display: flex;
-  justify-content: center;
+  width: 60%;
+  justify-content: left;
   font-weight: bolder;
 }
 
@@ -33,7 +36,7 @@ body {
   display: flex;           /* 使用 flexbox 佈局 */
   flex-direction: column;  /* 設定排列方向為垂直 */
   align-items: center;     /* 項目在水平方向上居中 */
-  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  color:#77b6f9;
 }
 
 /* App.css 或者其他你的樣式文件 */
@@ -42,26 +45,27 @@ body {
 .navbar {
   display: flex;
   flex-direction: row;
-  justify-content: center; /* 水平居中 */
+  justify-content: right;
+  align-items:end;
+  width: 40%;
+  margin-right: 3%;
 }
 
 /* 設置每個按鈕樣式 */
 .nav-button {
   display: flex;
+  height: 50%;
+  width: 20%;
   align-items: center;
   justify-content: center;
-  width: 110px;
-  height: 35px;
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background: linear-gradient(45deg, #007bff00, #0057b300);
   color: white;
   font-weight: 1000;
-  padding: 10px 20px;
   text-decoration: none; /* 去除預設的下劃線 */
-  margin: 50px 15px; /* 按鈕之間的間隔 */
-  border-radius: 12px;
-  font-size: 30px;
+  border-radius: 20px;
+  font-size: 100%;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
-  border: solid 3px #02254a;
+  border: solid 3px #02254a00;
   text-shadow:
     2px 2px 0 #000,  /* 左上 */
     -2px -2px 0 #000, /* 右下 */
@@ -70,16 +74,17 @@ body {
   opacity: 0.5;
 }
 
+
 /* 當前頁面按鈕高亮 */
 .nav-button.active {
-  background: linear-gradient(45deg, #0634cd, #0056b3);
+  background: linear-gradient(45deg, #0634cd00, #0057b300);
   text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
   opacity: 1; /* 高亮時不透明 */
 }
 
 /* 鼠標懸停效果 */
 .nav-button:hover {
-  background: blue;
+  background: #2980b9;
   transform: scale(1.07);
   animation: none; /* 移除浮動動畫，避免影響 hover */
   opacity: 1;
@@ -162,14 +167,26 @@ body {
 
 
 .menu-container {
+  overflow-x: hidden;  /* 隱藏水平滾動條 */
   display: flex;
   flex-direction: row;
-  height: 120px;
+  height: 15vh;
+  width: 100vw;
   padding: 2px;
   border-bottom: solid 2px rgba(255, 255, 255, 0.219);
   background: linear-gradient(45deg, #000000, #1c3550, #000000);
-  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.5), -5px -5px 15px rgba(0, 0, 0, 0.3); /* 更強的陰影效果 */
+  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.5), -5px -5px 15px rgba(255, 255, 255, 0.3); /* 更強的陰影效果 */
 }
 
+.app-container{
+  overflow-x: hidden;  /* 隱藏水平滾動條 */
+}
 
+.homeIcon{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-right: 5%;
+  box-shadow: 0 0 20px #007bff, 0 0 15px #007bff, 0 0 10px #ffffff, 0 0 10px #007bff;
+}
 

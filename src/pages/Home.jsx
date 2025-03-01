@@ -3,6 +3,7 @@ import React from "react";
 import './Home.css';
 import githubIcon from '../img/Github.png';
 import gmailIcon from '../img/Email.png';
+import Discord from '../img/Discord.webp';
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -11,9 +12,9 @@ const Home = () => {
 
       <main>
         <div className="welcome">
-          <p className="welcome-content1"><span> 🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站! </p>
-          <p className="welcome-content2"><span>🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站!  </p>
-          <p className="welcome-content3"><span>🔥 Welcome to my personal website! 🚀 Stay tuned for updates! 🎵</span>🔥 歡迎來到我的網站!  </p>   
+          <p className="welcome-content1"><span>  Welcome to my personal website!  Stay tuned for updates! </span>  </p>
+          <p className="welcome-content2"><span> Welcome to my personal website!  Stay tuned for updates! </span> </p>
+          <p className="welcome-content3"><span> Welcome to my personal website!  Stay tuned for updates! </span>  </p>   
         </div>
 
 
@@ -24,10 +25,13 @@ const Home = () => {
           <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
             <img src={gmailIcon} alt="Mail" className="icon"/>
           </a>
+          <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
+            <img src={Discord} alt="Discord" className="icon"/>
+          </a>
         </section>
 
         <div class="greeting-container">
-          <p class="greeting">Currently debugging life… </p>
+          <div class="greeting">Currently debugging life… </div>
         </div>
 
         <section class ="text">

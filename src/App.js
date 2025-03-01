@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import bimg from './img/BC.webp';
 import ParticleBackground from './pages/ParticlesBackground';
+import home from './img/home.webp';
 
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { useEffect } from 'react';
@@ -39,10 +40,10 @@ function AppContent() {
     <div className="app-container" >
       <div className="menu-container">
         <div className="head-container">
-          <h1 className="header">
-            <h1 className="headText"></h1>
-             Huang Shuo's Personal Website
-          </h1>
+          <div className="header">
+             
+             <div>Huang   Shuo</div>
+          </div>
         </div>
 
         <nav className="navbar">
