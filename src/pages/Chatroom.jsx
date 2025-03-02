@@ -42,10 +42,13 @@ const Chatroom = () => {
 
   const fetchMessages = async () => {
     try {
+      // 發送 GET 請求到伺服器端的消息 API，並攜帶 Authorization token
       const res = await fetch("http://localhost:5000/messages", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch messages");
+
+      
       const data = await res.json();
       setMessages(data);
     } catch (err) {
@@ -71,11 +74,12 @@ const Chatroom = () => {
       const res = await fetch(`http://localhost:5000/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(userData), // 將 userData 轉換為 JSON 字串作為請求的內容
       });
 
       if (!res.ok) throw new Error(`${endpoint} failed`);
-
+      
+      // 解析回應的 JSON 資料
       const data = await res.json();
       if (endpoint === "login") {
         setToken(data.token);
