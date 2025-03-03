@@ -149,6 +149,10 @@ p span {
    border-right: 2px solid; /* 光標效果 */
    font-size: 5em;
    width: 13em;
+   text-shadow: 0 0 5px #ffffff, 0 0 8px #9faab5, 0 0 12px #b3bac2, 0 0 15px #82909e;
+   padding:3%;
+   opacity: 1;
+   color:#001e36;
 
    animation: typing 6s steps(13) infinite, caret 1s steps(1) infinite;
    font-weight: bolder;

@@ -39,10 +39,10 @@ function AppContent() {
     <div className="app-container" >
       <div className="menu-container">
         <div className="head-container">
-          <h1 className="header">
+          <div className="header">
             <h1 className="headText"></h1>
              Huang Shuo's Personal Website
-          </h1>
+          </div>
         </div>
 
         <nav className="navbar">
