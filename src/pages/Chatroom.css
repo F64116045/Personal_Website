@@ -79,10 +79,101 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* 使視窗居中 */
-  background-color: white;
+  background: linear-gradient(90deg, #595c5c58, #001020);
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px ;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 30vh;
   z-index: 10;
+  border: 2px solid #68aaf0;
+
+  animation: modal-pop 0.3s ease-out
+}
+
+.modal-error {
+  position: fixed; /* ✅ 固定在畫面上，不會擠壓其他元素 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* ✅ 確保彈窗完全置中 */
+  background: linear-gradient(45deg, #000000, #3f4348);
+  color: white;
+  z-index: 1000; /* ✅ 設置較高的 z-index，確保顯示在最上層 */
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 30vh;
+  text-align: center;
+
+  animation: modal-pop 0.3s ease-out, modal-shake 0.3s ease-in-out 0.3s;
+}
+
+
+@keyframes modal-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-shake {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  20% { transform: translate(-50%, -50%) rotate(1deg); }
+  40% { transform: translate(-50%, -50%) rotate(-2deg); }
+  60% { transform: translate(-50%, -50%) rotate(1deg); }
+  80% { transform: translate(-50%, -50%) rotate(-2deg); }
+  100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+.login-container{
+  margin-top: 2vh;
+  width: 50vh;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-button{
+  margin-top: 2vh;
+  height: 50%;
+  width: 30%;
+  background: linear-gradient(45deg, #083c722b, #0239742d);
+  color: white;
+  font-weight: 1000;
+  text-decoration: none; /* 去除預設的下劃線 */
+  border-radius: 20px;
+  font-size: 100%;
+  transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
+  border: solid 3px #02254a00;
+}
+
+/* 鼠標懸停效果 */
+.login-button:hover {
+  background: #2980b9;
+  transform: scale(1.07);
+  animation: none; /* 移除浮動動畫，避免影響 hover */
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  opacity: 1;
+}
+
+.logout-button:hover {
+  background: #2980b9;
+  transform: scale(1.1);
+  animation: none; /* 移除浮動動畫，避免影響 hover */
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  opacity: 1;
+}
+
+.logout-button{
+  margin-top: 2vh;
+  background: linear-gradient(45deg, #083c722b, #0239742d);
+  color: white;
+  border-radius: 20px;
+  border: solid 3px #02254a;
+  height: 5vh;
+  width: 10vh;
 }
