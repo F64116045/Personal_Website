@@ -101,7 +101,7 @@ const Chatroom = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-chatroom">
       {!token ? (
         <div className="login-container">
           <button onClick={() => setShowLoginModal(true)}>登入</button>

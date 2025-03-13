@@ -6,13 +6,13 @@
 
 .class{
     border: 1px solid white;  /* ✅ 修正：加入 `border` 屬性 */
-    width: 27vw;
-    height: 3vh;
-    font-size: 1.1rem;
+    width: 30vw;
+    height: 5vh;
+    font-size: 3vh;
     font-weight: 600;
     color: white;
     text-align: left;
-    margin-bottom: 4%;
+    margin-bottom: 2.5%;
     border-radius: 10px;
     background-color: rgb(52, 51, 53);
     text-shadow:
@@ -21,7 +21,7 @@
       2px -2px 0 #000,  /* 右上 */
       -2px 2px 0 #000;  /* 左下 */
     
-    padding: 5%;
+    padding: 2%;
     opacity: 0.65;
     background: linear-gradient(90deg, #1997b358, #1a2128);
 }
@@ -29,6 +29,8 @@
 .class:hover{
     opacity: 1;
     transform: scale(1.1); 
+    text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+    box-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 20px #007bff, 0 0 35px #819bb7;;
 }
 
 .course-text{

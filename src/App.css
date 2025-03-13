@@ -3,7 +3,6 @@ body {
   background-color: #393d3f;
   height: 100%;
   margin: 0;
-  position: relative;  /* 確保 body 元素不會影響粒子顯示 */
   z-index: 1; /* 設置較高的 z-index */
   /*animation: gradientAnimation 9s infinite;*/
   backdrop-filter: blur(155px)
@@ -87,12 +86,13 @@ body {
   background: #2980b9;
   transform: scale(1.07);
   animation: none; /* 移除浮動動畫，避免影響 hover */
-  opacity: 1;
+  opacity: 0.6;
 }
 
 /* 被點擊時的效果 */
 .nav-button:active {
-  transform: scale(0.9);
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  transform: scale(0.85);
 }
 
 /* 高亮按鈕的懸停效果 */
@@ -180,6 +180,17 @@ body {
 
 .app-container{
   overflow-x: hidden;  /* 隱藏水平滾動條 */
+  animation: fadeInAnimation 2.5s ease-in-out forwards;
+}
+@keyframes fadeInAnimation {
+  from {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .homeIcon{
