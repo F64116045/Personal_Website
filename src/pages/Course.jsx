@@ -2,7 +2,7 @@ import './Course.css';
 
 function Course() {
   return (
-    <div className="container">
+    <div className="Course-container">
       <div className="course-text">修習過的程式設計 / 資訊工程領域 相關課程</div>
       <div>
         <div className="class">計算機概論    <span style={{ color: "rgb(0, 200, 255)" }}>A</span> </div>

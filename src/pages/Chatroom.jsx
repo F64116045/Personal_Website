@@ -180,13 +180,13 @@ const Chatroom = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-chatroom">
       {errorMessage && <ErrorModal message={errorMessage} onClose={() => setErrorMessage("")} />}
 
       {!token ? (
         <div className="login-container">
-          <button onClick={() => setShowLoginModal(true)}>登入</button>
-          <button onClick={() => setShowRegisterModal(true)}>註冊</button>
+          <button className="login-button"  onClick={() => setShowLoginModal(true)}>登入</button>
+          <button className="login-button"  onClick={() => setShowRegisterModal(true)}>註冊</button>
         </div>
       ) : (
         <button onClick={handleLogout} className="logout-button">登出</button>
@@ -253,8 +253,8 @@ const AuthModal = ({ title, onSubmit, onClose }) => {
     <div className="modal">
       <div className="modal-content">
         <h2>{title}</h2>
-        <input type="text" placeholder="輸入用戶名" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="輸入密碼" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="text" placeholder="輸入用戶名" value={username} className="input-login" onChange={(e) => setUsername(e.target.value)} />
+        <input type="password" placeholder="輸入密碼" value={password} className="input-login" onChange={(e) => setPassword(e.target.value)} />
         <button onClick={() => onSubmit({ username, password })}>{title}</button>
         <button onClick={onClose}>關閉</button>
       </div>

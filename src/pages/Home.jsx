@@ -45,7 +45,7 @@ const Home = () => {
 
         <section class ="contact">
           <h3>聯繫我</h3>
-          <p>如果你有興趣與我合作或進一步了解我的工作，請隨時聯繫我。</p>
+          <p>F64116045@gs.ncku.edu.tw。</p>
         </section>
       </main>
 

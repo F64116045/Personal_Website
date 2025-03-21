@@ -1,0 +1,102 @@
+html, body {
+    height: 100%;  /* 讓整個頁面高度為 100% */
+    margin: 0;     /* 去除預設的邊距 */
+  }
+  
+  .projects-container {
+    min-height: 100vh;  /* 讓元素的最小高度為螢幕高度 */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 每行顯示兩個項目 */
+    gap: 2%;  /* 設置每個項目之間的間距 */
+    justify-items: center;  /* 水平居中對齊每個項目 */
+    align-items: flex-start; /* 垂直頂部對齊 */
+    padding: 2%; /* 防止邊界緊貼 */
+  }
+  
+  .project {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(0, 0, 0); 
+    width: 40vw; /* 確保每個項目占滿一格 */
+    min-height: 14vh;
+    font-size: 3vh;
+    font-weight: 600;
+    color: #beddff;
+    text-align: top;
+    margin-bottom: 3.5%;
+    border-radius: 10px;
+    background-color: rgb(52, 51, 53);
+    text-shadow:
+      2px 2px 0 #000,  /* 左上 */
+      -2px -2px 0 #000, /* 右下 */
+      2px -2px 0 #000,  /* 右上 */
+      -2px 2px 0 #000;  /* 左下 */
+  
+    padding: 5%;
+    opacity: 1;
+    background: linear-gradient(90deg, #1997b358, #1a21282f);
+  }
+  
+  .project-intro {
+    font-size: 2vh;
+    margin-top: auto;
+    font-weight: normal;
+    color: white;
+    text-shadow: none;
+    opacity: 0.6;
+  }
+
+  .project-intro:hover{
+    opacity: 1;
+  }
+  
+  .project-header {
+    margin-bottom: 5%;
+  }
+  
+  .project:hover{
+    opacity: 1;
+    transform: scale(1.1); 
+    text-shadow: 0 0 5px #006e48, 0 0 8px #0aae90, 0 0 20px #a0f7f6, 0 0 35px #819bb7;
+    box-shadow: 0 0 5px #00ffa6, 0 0 8px #0aae90, 0 0 20px #a0f7f6, 0 0 35px #819bb7;
+    cursor: pointer;
+}
+
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* 確保 modal 在最上層 */
+  }
+  
+  .project-modal-content {
+    width: 70vw;
+    min-height: 60vh;
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation: project-modal-pop 0.2s ease-out;
+    background: linear-gradient(90deg, #000c1a, #020e1cbd, #000c1a);
+  }
+  
+  .close-button{
+  cursor: pointer;
+  }
+
+  @keyframes project-modal-pop {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

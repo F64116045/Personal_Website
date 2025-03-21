@@ -84,7 +84,6 @@ body {
 /* 鼠標懸停效果 */
 .nav-button:hover {
   background: #2980b9;
-  transform: scale(1.07);
   animation: none; /* 移除浮動動畫，避免影響 hover */
   opacity: 0.6;
 }
@@ -98,7 +97,6 @@ body {
 /* 高亮按鈕的懸停效果 */
 .nav-button.active:hover {
   background: #2980b9;  /* 當前頁面按鈕懸停的顏色 */
-  transform: scale(1.07); /* 懸停效果 */
 }
 
 /* 高亮按鈕的點擊效果 */
