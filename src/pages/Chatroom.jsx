@@ -3,33 +3,22 @@ import { io } from "socket.io-client";
 import './Chatroom.css';
 import { jwtDecode } from 'jwt-decode';
 
-const socket = io("http://localhost:5000"); // ✅ 連線到 WebSocket
+const socket = io("http://localhost:5000");
 
 const Chatroom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [token, setToken] = useState(localStorage.getItem("token") || ""); 
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // ❌ 儲存錯誤訊息
   const [selectedVisitor, setSelectedVisitor] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   const messagesEndRef = useRef(null);
 
-  const adminId = "admin"; // 假設管理員 ID
-
   useEffect(() => {
-    if (!token) return;
-
-    try {
-      const decodedToken = jwtDecode(token);
-      if (decodedToken.userId) {
-        fetchMessages();
-        joinChatRoom();
-      }
-    } catch (error) {
-      console.error("JWT 解碼錯誤:", error);
-      setToken("");
-      localStorage.removeItem("token");
+    if (token) {
+      fetchMessages();
     }
   }, [token]);
 
@@ -42,84 +31,145 @@ const Chatroom = () => {
       console.log("WebSocket connected:", socket.id);
     });
 
-    socket.on("receive_private_message", (message) => {
+    socket.on("receive_message", (message) => {
       console.log("📥 收到訊息:", message);
-      setMessages((prevMessages) => [...prevMessages, message]); // ✅ 即時顯示訊息
+      setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    return () => socket.off("receive_private_message");
+    socket.on("update_online_users", (users) => {
+      setOnlineUsers(users.filter(user => user !== "admin"));
+    });
+
+    return () => {
+      socket.off("receive_message");
+      socket.off("update_online_users");
+    };
   }, []);
 
-  const joinChatRoom = () => {
-    if (!token) return;
-
-    try {
-      const decodedToken = jwtDecode(token);
-      if (!decodedToken.userId) return;
-      socket.emit("join_room", decodedToken.userId);
-    } catch (error) {
-      console.error("JWT 解碼錯誤:", error);
-      setToken("");
-      localStorage.removeItem("token");
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
-  };
+  }, [messages]);
+  
+
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/messages/${adminId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error("Failed to fetch messages");
+        const storedToken = localStorage.getItem("token");
+        if (!storedToken) throw new Error("未找到 Token，請重新登入");
 
-      const data = await res.json();
-      setMessages(data);
+        console.log("🚀 嘗試獲取歷史訊息...");
+        console.log("🛠️ Token:", storedToken);
+
+        const res = await fetch("http://localhost:5000/messages", {
+            headers: { Authorization: `Bearer ${storedToken}` },
+        });
+
+        console.log("🔄 伺服器回應狀態碼:", res.status);
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            console.error("❌ 伺服器錯誤:", errorData);
+            throw new Error(errorData.message || "無法獲取訊息");
+        }
+
+        const data = await res.json();
+        console.log("✅ 歷史訊息獲取成功:", data);
+
+        // ✅ 確保 sender 是字串
+        const formattedMessages = data.map(msg => ({
+            ...msg,
+            sender: msg.sender.username || msg.sender, // 確保 sender 為字串
+        }));
+
+        setMessages(formattedMessages);
     } catch (err) {
-      console.error(err);
+        console.error("❌ 錯誤:", err);
+        setErrorMessage(err.message || "無法獲取訊息，請稍後再試。");
     }
   };
+
+
+
+  const handleSendMessage = async () => {
+    if (input.trim() === "" || !token) return;
+
+    try {
+        const decodedToken = jwtDecode(token);
+        if (!decodedToken?.userId || !decodedToken?.username) throw new Error("無效的 Token");
+
+        const userId = decodedToken.userId;
+        const username = decodedToken.username;  // ✅ 取得 username
+        
+
+        const messageData = {
+            sender: userId,
+            text: input,
+            timestamp: new Date(),
+        };
+
+        const res = await fetch("http://localhost:5000/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(messageData),
+        });
+
+        if (!res.ok) throw new Error("訊息儲存失敗");
+
+        const savedMessage = await res.json();
+
+        // ✅ 這裡確保 sender 直接顯示 username
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            { ...savedMessage, sender: username }  // ⚡️ 改成 `username`，不顯示 `userId`
+        ]);
+
+        socket.emit("send_private_message", { ...savedMessage, sender: username }); // ✅ 廣播正確的 username
+        setInput("");
+    } catch (error) {
+        console.error("無法發送訊息:", error);
+        setErrorMessage("發送訊息時發生錯誤");
+    }
+};
+
+
+
 
   const handleAuth = async (endpoint, userData) => {
     try {
-      const res = await fetch(`http://localhost:5000/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
-      });
+        console.log("🚀 嘗試登入/註冊:", endpoint);
+        console.log("🛠️ 發送的資料:", userData);
 
-      const data = await res.json();
+        const res = await fetch(`http://localhost:5000/${endpoint}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData),
+        });
 
-      if (!res.ok || !data.token) {
-        throw new Error(data.message || (endpoint === "login" ? "登入失敗" : "註冊失敗"));
-      }
+        console.log("🔄 伺服器回應狀態碼:", res.status);
+        const data = await res.json();
 
-      setToken(data.token);
-      localStorage.setItem("token", data.token);
-      setShowLoginModal(false);
-      setShowRegisterModal(false);
-      fetchMessages();
-      joinChatRoom();
+        if (!res.ok) {
+            console.error("❌ 錯誤回應:", data);
+            throw new Error(data.message || `${endpoint} 失敗`);
+        }
+
+        if (endpoint === "login") {
+            console.log("✅ 登入成功，Token:", data.token);
+            localStorage.setItem("token", data.token);
+            setToken(data.token);
+            setShowLoginModal(false);
+            fetchMessages();
+        } else {
+            setShowRegisterModal(false);
+        }
     } catch (err) {
-      console.error(err);
-      setErrorMessage(err.message);
-    }
-  };
-
-  const handleSendMessage = async () => {
-    if (input.trim() === "") return;
-
-    try {
-      const decodedToken = jwtDecode(token);
-      const userId = decodedToken.userId;
-      const receiverId = decodedToken.role === "admin" ? selectedVisitor : adminId;
-
-      const messageData = { sender: userId, receiver: receiverId, text: input, timestamp: new Date() };
-
-      setMessages((prevMessages) => [...prevMessages, messageData]); // ✅ 立即顯示訊息
-      socket.emit("send_private_message", messageData);
-      setInput("");
-    } catch (error) {
-      console.error("無法發送訊息:", error);
-      setErrorMessage("發送訊息時發生錯誤");
+        console.error("❌ 發生錯誤:", err);
+        setErrorMessage(err.message || "請檢查輸入內容");
     }
   };
 
@@ -130,61 +180,61 @@ const Chatroom = () => {
   };
 
   return (
-    <div className="container-chatroom">
+    <div className="container">
+      {errorMessage && <ErrorModal message={errorMessage} onClose={() => setErrorMessage("")} />}
+
       {!token ? (
         <div className="login-container">
-          <button className="login-button" onClick={() => setShowLoginModal(true) }>登入</button>
-          <button className="login-button" onClick={() => setShowRegisterModal(true)}>註冊</button>
+          <button onClick={() => setShowLoginModal(true)}>登入</button>
+          <button onClick={() => setShowRegisterModal(true)}>註冊</button>
         </div>
       ) : (
         <button onClick={handleLogout} className="logout-button">登出</button>
       )}
 
-      {errorMessage && <ErrorModal message={errorMessage} onClose={() => setErrorMessage("")} />}
-
       <div className="chatroom">
-        {showRegisterModal && (
-          <AuthModal
-            title="註冊"
-            onSubmit={(userData) => handleAuth("register", userData)}
-            onClose={() => setShowRegisterModal(false)}
-          />
-        )}
-
-        {showLoginModal && (
-          <AuthModal
-            title="登入"
-            onSubmit={(userData) => handleAuth("login", userData)}
-            onClose={() => setShowLoginModal(false)}
-          />
-        )}
-
         <div className="messages-container">
           {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.sender === adminId ? "admin" : "visitor"}`}>
-              <span>{msg.sender === adminId ? "管理員" : "訪客"}: {msg.text}</span>
+            <div key={index} className="message">
+              <span>{msg.sender}: {msg.text}</span>
             </div>
           ))}
-          <div ref={messagesEndRef} />
         </div>
-
         {token && (
-          <div className="input-container">
-            <textarea
-              className="inputbox"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="輸入訊息..."
-            />
-            <button className="send-button" onClick={handleSendMessage}>送出</button>
-          </div>
-        )}
+        <div className="input-container">
+          <textarea
+            className="inputbox"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="輸入訊息..."
+          />
+          <button className="send-button" onClick={handleSendMessage}>送出</button>
+        </div>)
+        }
+        
       </div>
+      
+
+      {showRegisterModal && (
+        <AuthModal title="註冊" onSubmit={(userData) => handleAuth("register", userData)} onClose={() => setShowRegisterModal(false)} />
+      )}
+
+      {showLoginModal && (
+        <AuthModal title="登入" onSubmit={(userData) => handleAuth("login", userData)} onClose={() => setShowLoginModal(false)} />
+      )}
     </div>
   );
 };
 
 const ErrorModal = ({ message, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [message]);
+
   return (
     <div className="modal-error">
       <div className="modal-content">
