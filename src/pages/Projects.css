@@ -68,7 +68,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    backdrop-filter: blur(12px); /* 讓背景變模糊 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +81,7 @@ html, body {
     background-color: rgb(0, 0, 0);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.374);
     animation: project-modal-pop 0.2s ease-out;
     background: linear-gradient(90deg, #000c1a, #020e1cbd, #000c1a);
   }

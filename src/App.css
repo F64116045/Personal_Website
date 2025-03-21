@@ -59,10 +59,10 @@ body {
   justify-content: center;
   background: linear-gradient(45deg, #007bff00, #0057b300);
   color: white;
-  font-weight: 1000;
+  font-weight: 900;
   text-decoration: none; /* 去除預設的下劃線 */
   border-radius: 20px;
-  font-size: 100%;
+  font-size: 2.5vh;
   transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
   border: solid 3px #02254a00;
   text-shadow:

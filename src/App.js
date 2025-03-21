@@ -47,10 +47,10 @@ function AppContent() {
         </div>
 
         <nav className="navbar">
-            <NavLink to="/" className="nav-button" activeClassName="active">Home</NavLink>
-            <NavLink to="/projects" className="nav-button" activeClassName="active">Projects</NavLink>
-            <NavLink to="/course" className="nav-button" activeClassName="active">Course</NavLink>
-            <NavLink to="/chat" className="nav-button" activeClassName="active">Messages</NavLink>
+            <NavLink to="/" className="nav-button" activeClassName="active">首頁</NavLink>
+            <NavLink to="/projects" className="nav-button" activeClassName="active">專案</NavLink>
+            <NavLink to="/course" className="nav-button" activeClassName="active">修課</NavLink>
+            <NavLink to="/chat" className="nav-button" activeClassName="active">留言</NavLink>
         </nav>
       </div>
 
