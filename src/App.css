@@ -1,0 +1,201 @@
+body {
+  color: white; /* 文字顏色為白色 */
+  background-color: #393d3f;
+  height: 100%;
+  margin: 0;
+  z-index: 1; /* 設置較高的 z-index */
+  /*animation: gradientAnimation 9s infinite;*/
+  backdrop-filter: blur(155px)
+}
+
+.content{
+  width: 100vw;
+  background: linear-gradient(90deg, #000000, #020e1cbd, #000c1a);
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 2.5rem;
+  white-space: nowrap;
+  margin-left: 20%;
+  color:#77b6f9;
+  text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #000000, 0 0 10px #000000;
+}
+
+.head-container{
+  display: flex;
+  width: 60%;
+  justify-content: left;
+  font-weight: bolder;
+}
+
+.welcome{
+  display: flex;           /* 使用 flexbox 佈局 */
+  flex-direction: column;  /* 設定排列方向為垂直 */
+  align-items: center;     /* 項目在水平方向上居中 */
+  color:#77b6f9;
+}
+
+/* App.css 或者其他你的樣式文件 */
+
+/* 設置navbar容器 */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items:end;
+  width: 40%;
+  margin-right: 3%;
+}
+
+/* 設置每個按鈕樣式 */
+.nav-button {
+  display: flex;
+  height: 50%;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #007bff00, #0057b300);
+  color: white;
+  font-weight: 900;
+  text-decoration: none; /* 去除預設的下劃線 */
+  border-radius: 20px;
+  font-size: 2.5vh;
+  transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
+  border: solid 3px #02254a00;
+  text-shadow:
+    2px 2px 0 #000,  /* 左上 */
+    -2px -2px 0 #000, /* 右下 */
+    2px -2px 0 #000,  /* 右上 */
+    -2px 2px 0 #000;  /* 左下 */
+  opacity: 0.5;
+}
+
+
+/* 當前頁面按鈕高亮 */
+.nav-button.active {
+  background: linear-gradient(45deg, #0634cd00, #0057b300);
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  opacity: 1; /* 高亮時不透明 */
+}
+
+/* 鼠標懸停效果 */
+.nav-button:hover {
+  background: #2980b9;
+  animation: none; /* 移除浮動動畫，避免影響 hover */
+  opacity: 0.6;
+}
+
+/* 被點擊時的效果 */
+.nav-button:active {
+  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
+  transform: scale(0.85);
+}
+
+/* 高亮按鈕的懸停效果 */
+.nav-button.active:hover {
+  background: #2980b9;  /* 當前頁面按鈕懸停的顏色 */
+}
+
+/* 高亮按鈕的點擊效果 */
+.nav-button.active:active {
+  transform: scale(0.9);
+}
+
+
+
+/* 定義動畫 */
+@keyframes gradientAnimation {
+  0% {
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
+    background-size: 100% 100%; /* 初始時背景會更大 */
+    background-position: center center; /* 設定背景以螢幕中心為基準 */
+  }
+  50% {
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(5, 121, 222) 100%);
+    background-size: 120% 120%; /* 背景縮小 */
+    background-position: center center; /* 繼續以中心為基準 */
+  }
+  100% {
+    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
+    background-size: 100% 100%; /* 背景恢復原來的大小 */
+    background-position: center center; /* 確保背景縮放的中心不變 */
+  }
+}
+
+
+
+@keyframes floating {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(5px, -5px);
+  }
+  50% {
+    transform: translate(-5px, -10px);
+  }
+  75% {
+    transform: translate(-5px, 5px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+
+
+
+
+
+@keyframes floatinghead {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+
+
+.menu-container {
+  overflow-x: hidden;  /* 隱藏水平滾動條 */
+  display: flex;
+  flex-direction: row;
+  height: 15vh;
+  width: 100vw;
+  padding: 2px;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.219);
+  background: linear-gradient(45deg, #000000, #1c3550, #000000);
+  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.5), -5px -5px 15px rgba(255, 255, 255, 0.3); /* 更強的陰影效果 */
+}
+
+.app-container{
+  overflow-x: hidden;  /* 隱藏水平滾動條 */
+  animation: fadeInAnimation 2.5s ease-in-out forwards;
+}
+@keyframes fadeInAnimation {
+  from {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.homeIcon{
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  margin-right: 5%;
+  box-shadow: 0 0 20px #007bff, 0 0 15px #007bff, 0 0 10px #ffffff, 0 0 10px #007bff;
+}
+
