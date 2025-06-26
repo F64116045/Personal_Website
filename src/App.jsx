@@ -9,7 +9,7 @@ import Course from "./pages/Course";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Personal_Website">
       <AppContent />
     </Router>
   );
@@ -19,11 +19,11 @@ function AppContent() {
   const location = useLocation();
 
   useEffect(() => {
-    const pagesWithScroll = ["/course", "/", "/projects"]; // ✅ 確保是小寫
+    const pagesWithScroll = ["/course", "/", "/projects"];
     if (pagesWithScroll.includes(location.pathname.toLowerCase())) {
-      document.body.style.overflowY = "auto"; // 允許滾動
+      document.body.style.overflowY = "auto";
     } else {
-      document.body.style.overflowY = "hidden"; // 移除滾輪
+      document.body.style.overflowY = "hidden";
     }
 
     return () => {
@@ -36,7 +36,6 @@ function AppContent() {
       <div className="menu-container">
         <div className="head-container">
           <div className="header">
-             
              <div>Huang   Shuo</div>
           </div>
         </div>
