@@ -5,20 +5,23 @@ import './Projects.css';
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  // 取得專案資料
   useEffect(() => {
     const fetchProjects = async () => {
       const { data, error } = await supabase
-        .from('Project')  // 對應你 Supabase 裡的表格名稱
-        .select('*');     // 如果有圖片 URL 欄位也一起選出來
+        .from('Project')
+        .select('*');
 
       if (error) {
         console.error('取得專案清單失敗：', error);
       } else {
         setProjects(data);
       }
+      setLoading(false);
     };
 
     fetchProjects();
@@ -33,6 +36,10 @@ function Projects() {
     setSelectedProject(null);
     setModalVisible(false);
   };
+
+  if (loading) {
+    return <div className="projects-container"><p>資料載入中...</p></div>;
+  }
 
   return (
     <div className="projects-container">

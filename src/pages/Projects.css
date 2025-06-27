@@ -12,6 +12,21 @@ html, body {
     align-items: flex-start; /* 垂直頂部對齊 */
     padding: 2%; /* 防止邊界緊貼 */
   }
+
+  .projects-container::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../img/ProjectBIMG.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    z-index: -1;
+  }
+  
   
   .project {
     display: flex;
