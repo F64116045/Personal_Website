@@ -127,18 +127,53 @@ html, body {
   background-position: center top;
 }
 
-.rich-text h5 {
-  font-size: 1.3rem;
-  margin-top: 2rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4); /* 半透明白色底線 */
-  border-left: 4px solid #00bcd4;
+.markdown-body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #ddd;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #111;
+}
+
+/* 主標題 */
+.markdown-body h1 {
+  color: #ffda6a;
+  border-bottom: 2px solid #555;
+  padding-bottom: 0.3rem;
+  margin-top: 1.5rem;
+}
+
+/* 次標題 */
+.markdown-body h2 {
+  color: #ffffff;
+  margin-top: 1.5rem;
+  border-left : 4px solid #66b3ff;
+  border-bottom: 2px solid #555;
   padding-left: 0.5rem;
 }
 
-.rich-text p {
-  margin-left: 1.5rem;
+/* 清單 */
+.markdown-body ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.markdown-body li {
   margin-bottom: 0.5rem;
-  line-height: 1.6;
+}
+
+/* 超連結 */
+.markdown-body a {
+  color: #4ec9b0;
+  text-decoration: underline;
+}
+
+/* 水平線 */
+.markdown-body hr {
+  border: 1px solid #444;
+  margin: 1.5rem 0;
 }
 
 @keyframes fadeIn {

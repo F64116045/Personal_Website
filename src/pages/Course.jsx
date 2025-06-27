@@ -1,7 +1,6 @@
 import './Course.css';
-import { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
-
+import { useEffect, useState } from 'react';
+import { supabase } from '.././supabase';
 
 function Course() {
   const [courses, setCourses] = useState([]);
@@ -9,38 +8,36 @@ function Course() {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:1337/api/courses')
-      .then(res => {
-        setCourses(res.data.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('API 錯誤：', err);
-        setLoading(false);
-      });
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from('Course') // ← 替換成你 Supabase 的資料表名稱
+        .select('*');
+        console.log(data);
+
+      if (error) {
+        console.error('Supabase 錯誤：', error);
+      } else {
+        setCourses(data);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
-  
   useEffect(() => {
-  if (selectedCourse) {
-      // 滾動到視窗置中
+    if (selectedCourse) {
       const modal = document.querySelector('.modal-content');
       modal?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-      // 鎖定背景滾動
       document.body.style.overflow = 'hidden';
     } else {
-      // 回復背景滾動
       document.body.style.overflow = '';
     }
 
-    // 清理：元件卸載時確保復原
     return () => {
       document.body.style.overflow = '';
     };
   }, [selectedCourse]);
-
-
 
   return (
     <div className="Course-container">
@@ -49,10 +46,10 @@ function Course() {
         {loading && <p>資料載入中...</p>}
         {!loading && courses.length === 0 && <p>目前沒有課程資料</p>}
         {!loading && courses.map(course => {
-          const { id, Course_name, Course_grade, Course_Desc } = course;
+          const {Course_name, Course_grade, Course_Desc, Course_Link} = course;
 
           return (
-            <div className="class" key={id} onClick={() => setSelectedCourse(course)}>
+            <div className="class" onClick={() => setSelectedCourse(course)}>
               {Course_name}
               {Course_grade && (
                 <span style={{ color: 'rgb(0, 200, 255)', marginLeft: '0.5em' }}>
@@ -69,10 +66,9 @@ function Course() {
               <p>{selectedCourse.Course_Desc || '無課程描述'}</p>
               <p>成績: {selectedCourse.Course_grade}</p>
               <button onClick={() => setSelectedCourse(null)}>關閉</button>
-              </div>
+            </div>
           </div>
         }
-
       </div>
     </div>
   );
