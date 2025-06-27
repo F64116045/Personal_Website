@@ -75,16 +75,36 @@ html, body {
     z-index: 9999; /* 確保 modal 在最上層 */
   }
   
-  .project-modal-content {
-    width: 70vw;
-    min-height: 60vh;
-    background-color: rgb(0, 0, 0);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.374);
-    animation: project-modal-pop 0.2s ease-out;
-    background: linear-gradient(90deg, #000c1a, #020e1cbd, #000c1a);
-  }
+.project-modal-content {
+  position: relative;
+  padding: 24px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8); /* 讓內容仍然可讀 */
+  color: white;
+  max-width: 70vw;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 10;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.project-modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image-url);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.2;
+  z-index: -1;
+  pointer-events: none;
+}
+
   
   .close-button{
   cursor: pointer;
@@ -100,3 +120,33 @@ html, body {
       opacity: 1;
     }
   }
+
+  .project-modal-content.with-bg {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+.rich-text h5 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4); /* 半透明白色底線 */
+  border-left: 4px solid #00bcd4;
+  padding-left: 0.5rem;
+}
+
+.rich-text p {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.98); }
+}

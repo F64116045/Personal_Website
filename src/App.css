@@ -19,7 +19,6 @@ body {
   align-items: center;
   font-size: 2.5rem;
   white-space: nowrap;
-  margin-left: 20%;
   color:#77b6f9;
   text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #000000, 0 0 10px #000000;
 }
@@ -199,3 +198,7 @@ body {
   box-shadow: 0 0 20px #007bff, 0 0 15px #007bff, 0 0 10px #ffffff, 0 0 10px #007bff;
 }
 
+.main-icon{
+  width: 6rem;
+  height: 6rem;
+}

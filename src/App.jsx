@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Course from "./pages/Course";
+import Icon from "./img/Icon.png";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function AppContent() {
       <div className="menu-container">
         <div className="head-container">
           <div className="header">
+            <img src={Icon} className='main-icon'/>
             <div>Huang Shuo</div>
           </div>
         </div>

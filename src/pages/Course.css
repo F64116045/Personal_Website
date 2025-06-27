@@ -1,56 +1,129 @@
-.Course-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+/* 整體容器設定 */
+.Course-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-bottom: 5vh;
 }
 
-.Course-container::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: 100% 200vh;
-    background-position: 50% 40%;
-    background-image: url("../img/Coding.png");
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    z-index: -1;
+/* 背景圖層設定 */
+.Course-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../img/Coding.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  z-index: -1;
 }
 
-.class{
-    border: 1px solid white;
-    width: 30vw;
-    height: 5vh;
-    font-size: 3vh;
-    font-weight: 600;
-    color: white;
-    text-align: left;
-    margin-bottom: 2.5%;
-    border-radius: 10px;
-    background-color: rgb(37, 51, 62);
-    text-shadow:
-      2px 2px 0 #000, 
-      -2px -2px 0 #000,
-      2px -2px 0 #000, 
-      -2px 2px 0 #000; 
-    opacity: 0.6;
-    padding: 2%;
-    background: linear-gradient(90deg, #1997b358, #1a2128);
+/* 單一課程樣式 */
+.class {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  width: 30vw;
+  min-height: 5vh;
+  font-size: 2.5vh;
+  font-weight: 600;
+  color: #e0faff;
+  text-align: left;
+  margin-bottom: 2.5%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(25,151,179,0.4), #1a2128);
+  text-shadow: 1px 1px 2px #000;
+  opacity: 0.6;
+  padding: 0.5em;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.class:hover{
-    opacity: 1;
-    transform: scale(1.1); 
-    text-shadow: 0 0 5px #006e48, 0 0 8px #0aae90, 0 0 20px #a0f7f6, 0 0 35px #819bb7;
-    box-shadow: 0 0 5px #006e48, 0 0 8px #0aae90, 0 0 20px #a0f7f6, 0 0 35px #819bb7;
+.class:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  text-shadow: 0 0 5px #00b388, 0 0 10px #1de5c6, 0 0 20px #8ff7f6;
+  box-shadow: 0 0 5px #00b388, 0 0 10px #1de5c6, 0 0 20px #8ff7f6;
 }
 
-.course-text{
-    font-size: 2rem;
-    margin-top: 2%;
-    margin-bottom: 4%;
-    font-weight: bolder;
+/* 標題文字 */
+.course-text {
+  font-size: 2.2rem;
+  margin-top: 2%;
+  margin-bottom: 4%;
+  font-weight: bold;
+  color: #e0faff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* modal 遮罩 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* modal 內容區塊 */
+.modal-content {
+  background-color: #1f1f1f;
+  color: #e0faff;
+  padding: 2em;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+  position: relative;
+}
+
+/* modal 中的標題與文字 */
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #5df5e7;
+}
+
+.modal-content p {
+  line-height: 1.6;
+  margin-top: 0.5em;
+}
+
+/* 關閉按鈕 */
+.modal-content button {
+  margin-top: 1.5em;
+  padding: 0.5em 1.5em;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #1de5c6;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+  background-color: #15baa2;
+  color: white;
+}
+
+/* 保證 HTML 與 BODY 高度設定正常 */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #0d1117;
+  font-family: 'Segoe UI', sans-serif;
 }
