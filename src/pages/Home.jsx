@@ -11,11 +11,8 @@ const Home = () => {
     <div className="home">
 
       <main>
-        <div className="welcome">
-          <p className="welcome-content1"><span>  Welcome to my personal website!  Stay tuned for updates! </span>  </p>
-          <p className="welcome-content2"><span> Welcome to my personal website!  Stay tuned for updates! </span> </p>
-          <p className="welcome-content3"><span> Welcome to my personal website!  Stay tuned for updates! </span>  </p>   
-        </div>
+        
+        
 
       
         <section className="iconContainer">
@@ -30,11 +27,11 @@ const Home = () => {
           </a>
         </section>
 
-        <div class="greeting-container">
-          <div class="greeting">Currently debugging life… </div>
+        <div className="greeting-container">
+          <div className="greeting">Currently debugging life… </div>
         </div>
 
-        <section class ="text">
+        <section className ="text">
           <h2>關於我</h2>
           <p>我是黃朔</p>
           <p>目前就讀於國立成功大學 測量及空間資訊學系 / 資訊工程學系 (雙主修)。</p>
@@ -43,7 +40,7 @@ const Home = () => {
         </section>
 
 
-        <section class ="contact">
+        <section className ="contact">
           <h3>聯繫我</h3>
           <p>F64116045@gs.ncku.edu.tw。</p>
         </section>

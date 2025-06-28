@@ -18,19 +18,6 @@ function App() {
 function AppContent() {
   const location = useLocation();
 
-  useEffect(() => {
-    const pagesWithScroll = ["/course", "/", "/projects"];
-    if (pagesWithScroll.includes(location.pathname.toLowerCase())) {
-      document.body.style.overflowY = "auto";
-    } else {
-      document.body.style.overflowY = "hidden";
-    }
-
-    return () => {
-      document.body.style.overflowY = "hidden"; // 清理效果
-    };
-  }, [location]);
-
   return (
     <div className="app-container">
       <div className="menu-container">
@@ -63,7 +50,7 @@ function AppContent() {
         </nav>
       </div>
 
-      <div className="content">
+      <div className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />

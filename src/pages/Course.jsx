@@ -10,8 +10,9 @@ function Course() {
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
-        .from('Course') // ← 替換成你 Supabase 的資料表名稱
-        .select('*');
+        .from('Course')
+        .select('*')
+        .order('Course_id', { ascending: true });
         console.log(data);
 
       if (error) {
@@ -45,11 +46,10 @@ function Course() {
       <div>
         {loading && <p>資料載入中...</p>}
         {!loading && courses.length === 0 && <p>目前沒有課程資料</p>}
-        {!loading && courses.map(course => {
-          const {Course_name, Course_grade, Course_Desc, Course_Link} = course;
-
+        {!loading && courses.map(course => { // 確保每個課程都有唯一的 key
+          const {Course_id, Course_name, Course_grade, Course_Desc, Course_Link, Course_Department} = course;
           return (
-            <div className="class" onClick={() => setSelectedCourse(course)}>
+            <div className="class"  key = {Course_id} onClick={() => setSelectedCourse(course)}>
               {Course_name}
               {Course_grade && (
                 <span style={{ color: 'rgb(0, 200, 255)', marginLeft: '0.5em' }}>
@@ -64,10 +64,25 @@ function Course() {
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <h3>{selectedCourse.Course_name}</h3>
               <p>{selectedCourse.Course_Desc || '無課程描述'}</p>
-              <p>成績: {selectedCourse.Course_grade}</p>
+              <h4>開課單位 : {selectedCourse.Course_Department || '尚無資料'}</h4>
+              <p>
+                {selectedCourse.Course_Link ? (
+                  <a
+                    href={selectedCourse.Course_Link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'blue', textDecoration: 'underline' }}
+                  >
+                    點此查看詳情
+                  </a>
+                ) : (
+                  '無連結'
+                )}
+              </p>
               <button onClick={() => setSelectedCourse(null)}>關閉</button>
             </div>
           </div>
+
         }
       </div>
     </div>
