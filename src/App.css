@@ -1,204 +1,543 @@
-body {
-  color: white; /* 文字顏色為白色 */
-  background-color: #393d3f;
-  height: 100%;
+/* 全局設定與變數 */
+:root {
+  --primary-cyan: #00ffff;
+  --secondary-cyan: #00cccc;
+  --accent-green: #00ff80;
+  --accent-blue: #0080ff;
+  --dark-bg: #0a0a0a;
+  --dark-blue: #1a1a2e;
+  --darker-blue: #16213e;
+  --glass-bg: rgba(10, 15, 25, 0.95);
+  --border-glow: rgba(0, 255, 255, 0.3);
+  --text-shadow-glow: rgba(0, 255, 255, 0.3);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 全局設定 */
+* {
   margin: 0;
-  z-index: 1; /* 設置較高的 z-index */
-  /*animation: gradientAnimation 9s infinite;*/
-  backdrop-filter: blur(155px)
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.content{
-  width: 100vw;
-  background: linear-gradient(90deg, #000000, #020e1cbd, #000c1a);
+body {
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 128, 255, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-blue) 50%, var(--darker-blue) 100%);
+  background-attachment: fixed;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  color: var(--primary-cyan);
+  overflow-x: hidden;
+  position: relative;
 }
 
+/* 動態背景粒子效果 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(0, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(0, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(0, 255, 255, 0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 150px;
+  animation: sparkle 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
 
+@keyframes sparkle {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-200px); }
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 主導航容器 */
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px) saturate(180%);
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 
+    0 8px 32px rgba(0, 255, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  height: 70px;
+  transition: var(--transition-smooth);
+}
+
+/* 滾動時縮小導航 */
+.menu-container.scrolled {
+  height: 60px;
+  padding: 12px 25px;
+  box-shadow: 
+    0 4px 20px rgba(0, 255, 255, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* 頭部容器 */
+.head-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* 增強雷射掃描效果 */
+.menu-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    rgba(0, 255, 255, 0.6),
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  animation: laserScan 4s infinite ease-in-out;
+}
+
+.menu-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-cyan),
+    var(--accent-green),
+    var(--accent-blue),
+    transparent
+  );
+  animation: borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes laserScan {
+  0% { left: -100%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* 頭部佈局 */
 .header {
   display: flex;
   align-items: center;
-  font-size: 2.5rem;
-  white-space: nowrap;
-  color:#77b6f9;
-  text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #000000, 0 0 10px #000000;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
 }
 
-.head-container{
-  display: flex;
-  width: 60%;
-  justify-content: left;
-  font-weight: bolder;
+/* 主圖標樣式 */
+.main-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-cyan);
+  padding: 3px;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 0.3), transparent 70%),
+    linear-gradient(45deg, #001a1a, #003333, #001a1a);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.2),
+    0 0 40px rgba(0, 255, 255, 0.3);
+  animation: iconFloat 3s ease-in-out infinite;
+  transition: var(--transition-bounce);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-.welcome{
-  display: flex;           /* 使用 flexbox 佈局 */
-  flex-direction: column;  /* 設定排列方向為垂直 */
-  align-items: center;     /* 項目在水平方向上居中 */
-  color:#77b6f9;
+.main-icon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(0, 255, 255, 0.3),
+    transparent
+  );
+  animation: iconSpin 4s linear infinite;
 }
 
-/* App.css 或者其他你的樣式文件 */
+.main-icon:hover {
+  transform: scale(1.15) rotate(10deg);
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.8),
+    inset 0 0 40px rgba(0, 255, 255, 0.3),
+    0 0 60px rgba(0, 255, 255, 0.5);
+  border-color: var(--accent-green);
+}
 
-/* 設置navbar容器 */
+@keyframes iconFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.2);
+  }
+  50% { 
+    transform: translateY(-3px) rotate(2deg);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), inset 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+}
+
+@keyframes iconSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* HUANG SHUO 文字樣式 */
+.header > div {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(
+    45deg, 
+    var(--primary-cyan), 
+    var(--accent-green), 
+    var(--accent-blue),
+    var(--primary-cyan)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s ease-in-out infinite;
+  text-shadow: 
+    0 0 20px var(--text-shadow-glow),
+    0 0 40px rgba(0, 255, 255, 0.2);
+  position: relative;
+  letter-spacing: 2px;
+  font-variant: small-caps;
+}
+
+.header > div::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    var(--primary-cyan), 
+    var(--accent-green),
+    var(--accent-blue),
+    transparent
+  );
+  border-radius: 2px;
+  animation: underlineFlow 3s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 200% 50%; }
+  75% { background-position: 100% 100%; }
+}
+
+@keyframes underlineFlow {
+  0%, 100% { 
+    opacity: 0.4; 
+    transform: scaleX(0.8);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scaleX(1.1);
+  }
+}
+
+/* 導航按鈕容器 */
 .navbar {
   display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items:end;
-  width: 40%;
-  margin-right: 3%;
-}
-
-/* 設置每個按鈕樣式 */
-.nav-button {
-  display: flex;
-  height: 50%;
-  width: 20%;
+  gap: 25px;
   align-items: center;
-  justify-content: center;
-  background: linear-gradient(45deg, #007bff00, #0057b300);
-  color: white;
-  font-weight: 900;
-  text-decoration: none; /* 去除預設的下劃線 */
-  border-radius: 20px;
-  font-size: 2.5vh;
-  transition: background-color 0.3s; /* 鼠標懸停過渡效果 */
-  border: solid 3px #02254a00;
-  text-shadow:
-    2px 2px 0 #000,  /* 左上 */
-    -2px -2px 0 #000, /* 右下 */
-    2px -2px 0 #000,  /* 右上 */
-    -2px 2px 0 #000;  /* 左下 */
-  opacity: 0.5;
+  position: relative;
 }
 
-
-/* 當前頁面按鈕高亮 */
-.nav-button.active {
-  background: linear-gradient(45deg, #0634cd00, #0057b300);
-  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
-  opacity: 1; /* 高亮時不透明 */
+/* 導航按鈕樣式 */
+.nav-button {
+  position: relative;
+  padding: 12px 24px;
+  text-decoration: none;
+  color: var(--secondary-cyan);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: 
+    linear-gradient(145deg, rgba(0, 30, 60, 0.7), rgba(0, 50, 80, 0.5)),
+    linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+  backdrop-filter: blur(15px);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* 鼠標懸停效果 */
-.nav-button:hover {
-  background: #2980b9;
-  animation: none; /* 移除浮動動畫，避免影響 hover */
-  opacity: 0.6;
+/* 按鈕內部光效 */
+.nav-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(0, 255, 255, 0.4), 
+    rgba(0, 255, 255, 0.6),
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 被點擊時的效果 */
-.nav-button:active {
-  text-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 12px #007bff, 0 0 15px #007bff;
-  transform: scale(0.85);
-}
-
-/* 高亮按鈕的懸停效果 */
-.nav-button.active:hover {
-  background: #2980b9;  /* 當前頁面按鈕懸停的顏色 */
-}
-
-/* 高亮按鈕的點擊效果 */
-.nav-button.active:active {
-  transform: scale(0.9);
-}
-
-
-
-/* 定義動畫 */
-@keyframes gradientAnimation {
-  0% {
-    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
-    background-size: 100% 100%; /* 初始時背景會更大 */
-    background-position: center center; /* 設定背景以螢幕中心為基準 */
-  }
-  50% {
-    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(5, 121, 222) 100%);
-    background-size: 120% 120%; /* 背景縮小 */
-    background-position: center center; /* 繼續以中心為基準 */
-  }
-  100% {
-    background: radial-gradient(circle, rgb(25, 25, 25) 80%, rgb(0, 134, 252) 100%);
-    background-size: 100% 100%; /* 背景恢復原來的大小 */
-    background-position: center center; /* 確保背景縮放的中心不變 */
-  }
-}
-
-
-
-@keyframes floating {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  25% {
-    transform: translate(5px, -5px);
-  }
-  50% {
-    transform: translate(-5px, -10px);
-  }
-  75% {
-    transform: translate(-5px, 5px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
-}
-
-
-
-
-
-
-@keyframes floatinghead {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-
-
-.menu-container {
-  overflow-x: hidden;  /* 隱藏水平滾動條 */
-  display: flex;
-  flex-direction: row;
-  height: 15vh;
-  width: 100vw;
-  padding: 2px;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.219);
-  background: linear-gradient(45deg, #000000, #1c3550, #000000);
-  box-shadow: 5px 5px 15px rgba(255, 255, 255, 0.5), -5px -5px 15px rgba(255, 255, 255, 0.3); /* 更強的陰影效果 */
-}
-
-.app-container{
-  overflow-x: hidden;  /* 隱藏水平滾動條 */
-  animation: fadeInAnimation 2.5s ease-in-out forwards;
-}
-@keyframes fadeInAnimation {
-  from {
-    transform: scale(1.2);
-    opacity: 0.3;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.homeIcon{
-  width: 4rem;
-  height: 4rem;
+.nav-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent 70%);
   border-radius: 50%;
-  margin-right: 5%;
-  box-shadow: 0 0 20px #007bff, 0 0 15px #007bff, 0 0 10px #ffffff, 0 0 10px #007bff;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(-50%, -50%);
 }
 
-.main-icon{
-  width: 6rem;
-  height: 6rem;
+.nav-button:hover::before {
+  left: 100%;
+}
+
+.nav-button:hover::after {
+  width: 100px;
+  height: 100px;
+}
+
+.nav-button:hover {
+  color: var(--primary-cyan);
+  border-color: var(--primary-cyan);
+  box-shadow: 
+    0 8px 30px rgba(0, 255, 255, 0.4),
+    inset 0 0 30px rgba(0, 255, 255, 0.15),
+    0 0 60px rgba(0, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.05);
+  background: 
+    linear-gradient(145deg, rgba(0, 40, 80, 0.8), rgba(0, 60, 100, 0.6)),
+    linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+}
+
+/* 活躍按鈕樣式 */
+.nav-button.active {
+  color: var(--primary-cyan);
+  border-color: var(--primary-cyan);
+  background: 
+    linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 180, 255, 0.15)),
+    linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+  box-shadow: 
+    0 6px 25px rgba(0, 255, 255, 0.5),
+    inset 0 0 25px rgba(0, 255, 255, 0.2),
+    0 0 50px rgba(0, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg, 
+    var(--primary-cyan), 
+    var(--accent-green), 
+    var(--accent-blue),
+    var(--primary-cyan)
+  );
+  border-radius: 2px 2px 0 0;
+  animation: activeGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes activeGlow {
+  0%, 100% { 
+    opacity: 0.6; 
+    transform: scaleX(0.9);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scaleX(1.1);
+  }
+}
+
+/* 內容區域 */
+.content {
+  margin-top: 70px;
+  padding: 40px;
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 70px);
+}
+
+/* 滾動條美化 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-cyan), var(--accent-blue));
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-green), var(--primary-cyan));
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  .navbar {
+    gap: 20px;
+  }
+  
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-container {
+    padding: 15px 20px;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    min-height: 80px;
+  }
+  
+  .menu-container.scrolled {
+    height: auto;
+    min-height: 70px;
+  }
+  
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .nav-button {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+  
+  .header > div {
+    font-size: 22px;
+  }
+  
+  .main-icon {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .content {
+    margin-top: 140px;
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .nav-button {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+  }
+  
+  .header {
+    gap: 15px;
+  }
+  
+  .header > div {
+    font-size: 20px;
+  }
+  
+  .main-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .content {
+    margin-top: 200px;
+    padding: 25px 15px;
+  }
+}
+
+/* 高對比度模式支持 */
+@media (prefers-contrast: high) {
+  .nav-button {
+    border-width: 2px;
+  }
+  
+  .main-icon {
+    border-width: 3px;
+  }
+}
+
+/* 減少動畫模式支持 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

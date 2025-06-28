@@ -1,207 +1,345 @@
-.head {
-    display: flex;
-    justify-content: center; /* 水平置中 */
- }
-
- .welcome {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between; /* 使句子間的間隔永遠相等 */
-   width: 50%; /* 設定寬度，讓它只占視窗的一部分 */
-   overflow: hidden; /* 隱藏超出區域的內容 */
-   margin: 0 auto; /* 讓它水平置中 */
-   font-size: 1.2rem;
-   font-weight: 1000;
-   opacity: 0.4;
-
+/* Home 頁面全局樣式 */
+.home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  color: #00ffff;
+  position: relative;
+  overflow-x: hidden;
 }
 
+/* 背景動態粒子效果 */
+.home::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(0, 255, 255, 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 128, 0.3), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(0, 128, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(0, 255, 255, 0.3), transparent);
+  background-size: 200px 200px;
+  animation: particleFloat 20s linear infinite;
+  z-index: -1;
+}
 
+@keyframes particleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-200px); }
+}
+
+/* 主要內容區域 */
+main {
+  padding: 40px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* 歡迎區域 - 跑馬燈效果（放慢速度，降低發光強度） */
+.welcome {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.05), transparent);
+  border-radius: 10px;
+}
+
+.welcome p {
+  position: absolute;
+  width: 200%;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  line-height: 60px;
+  animation: marquee 25s linear infinite; /* 從15s改為25s，更慢 */
+}
 
 .welcome-content1 {
-   display: inline-block;
-   white-space: nowrap;
-   animation: welcome1 15s linear infinite;
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4); /* 降低發光強度 */
+  animation-delay: 0s;
 }
+
 .welcome-content2 {
-   display: inline-block;
-   white-space: nowrap;
-   animation: welcome2 15s linear infinite;
+  color: #00ff80;
+  text-shadow: 0 0 8px rgba(0, 255, 128, 0.3); /* 降低發光強度 */
+  animation-delay: 8s; /* 調整延遲時間 */
 }
+
 .welcome-content3 {
-   display: inline-block;
-   white-space: nowrap;
-   animation: welcome3 15s linear infinite;
+  color: #0080ff;
+  text-shadow: 0 0 8px rgba(0, 128, 255, 0.3); /* 降低發光強度 */
+  animation-delay: 16s; /* 調整延遲時間 */
 }
 
-
-
-p span {
-   margin: 0 70px; /* 調整每個 span 之間的間隔 */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
-
-
-@keyframes welcome1 {
-   0% {
-     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
-   }
-   100% {
-     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
-   }
+/* 圖標容器 */
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 60px 0;
+  position: relative;
 }
 
-@keyframes welcome2 {
-   0% {
-     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
-   }
-   100% {
-     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
-   }
+/* 圖標樣式（放大尺寸） */
+.icon {
+  width: 80px; /* 從60px增加到80px */
+  height: 80px; /* 從60px增加到80px */
+  border-radius: 50%;
+  padding: 10px; /* 從8px增加到10px */
+  background: linear-gradient(45deg, rgba(0, 30, 60, 0.8), rgba(0, 60, 90, 0.8));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  animation: iconFloatSmooth 3s ease-in-out infinite;
 }
-@keyframes welcome3 {
-   0% {
-     transform: translateX(0); /* 文字從右邊進來，從容器外面開始 */
-   }
-   100% {
-     transform: translateX(-100%); /* 文字從左邊跑出，直到完全離開 */
-   }
-}
-
-
-
-
- 
- 
- 
- 
-
-
- .text{
-    margin-top: 100px;
-    display: flex;           /* 使用 flexbox 佈局 */
-    flex-direction: column;  /* 設定排列方向為垂直 */
-    align-items: center;     /* 項目在水平方向上居中 */
-    font-weight: 700;
-    font-size:1.3rem;
- }
-
- .contact{
-    margin-top: 10vh;
-    display: flex;           /* 使用 flexbox 佈局 */
-    flex-direction: column;  /* 設定排列方向為垂直 */
-    align-items: center;     /* 項目在水平方向上居中 */
- }
-
- footer{
-    display: flex;           /* 使用 flexbox 佈局 */
-    flex-direction: column;  /* 設定排列方向為垂直 */
-    align-items: center;     /* 項目在水平方向上居中 */
- }
-  
- .icon {
-   width: 12vh;
-   height: 12vh;
-   border-radius: 50%;
-   border-width: 3px;
-   border-style: solid; /* 這行是關鍵！ */
-   border-color: #03448a;
-   background: linear-gradient(45deg, #00366f, #779fc9, #00448c);
-   animation: floatinghead 4s ease-in-out infinite;
-   opacity: 0.9;
-
-}
-
-@keyframes floatinghead {
-   0% {
-     transform: translateY(15px);
-   }
-   50% {
-     transform: translateY(-10px);
-   }
-   100% {
-     transform: translateY(15px);
-   }
- }
 
 .icon:hover {
-   animation: none;
-   background: rgb(96, 182, 238);
-   transform: scale(1.1);
-   opacity: 1;
-   box-shadow: 0 0 20px #007bff, 0 0 80px #007bff, 0 0 90px #ffffff, 0 0 10px #007bff;
- }
-
-.iconContainer{
-   display: flex;
-   justify-content: center;
-   gap: 5vw;
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 1px rgba(0, 255, 255, 0.6),
+    inset 0 0 1px rgba(0, 255, 255, 0.2);
+  border-color: #00ffff;
 }
- 
- 
- .greeting-container {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-   height: 50vh;
 
+.icon:nth-child(1) {
+  animation-delay: 0s;
+}
 
- }
+.icon:nth-child(2) {
+  animation-delay: 1s;
+}
 
- .greeting-container::before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   background-image: url("../img/backg.png");
-   background-size: 100% 20%;
-   background-position: 50% 40%;
-   background-repeat: no-repeat;
-   opacity: 0.5; /* 這裡是控制背景圖片透明度 */
-   z-index: -1; /* 讓圖片處於元素後方 */
- }
- 
- .greeting {
-   display: inline-block;
-   overflow: hidden;
-   white-space: nowrap;
-   border-right: 2px solid; /* 光標效果 */
-   font-size: 5rem;
-   width: 13em;
-   color:#c2d3da;
-   animation: typing 6s steps(13) infinite, caret 1s steps(1) infinite;
-   font-weight: bolder;
-   padding: 3%;
+.icon:nth-child(3) {
+  animation-delay: 2s;
+}
 
+@keyframes iconFloatSmooth {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
 
+/* 問候語容器 - 打字機效果（放慢速度，增大字體） */
+.greeting-container {
+  text-align: center;
+  margin: 80px 0;
+  position: relative;
+}
 
-   text-shadow: 0 0 5px #000000, 0 0 8px #000000, 0 0 12px #ffffff, 0 0 15px #333f4d;
- }
- 
- /* 打字動畫 */
- @keyframes typing {
-   0%{
-      width: 0;
-   }
+.greeting {
+  font-size: 70px;
+  font-weight: bold;
+  color: #c2f2e4;
+  text-shadow: 0 0 6px rgb(232, 228, 228);
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #ffffff;
+  animation: typewriter 6s steps(40, end) infinite, blinkCursor 1s step-end infinite; /* 從4s改為6s */
+}
 
-   50%{
-      width: 13em;
-   }
+@keyframes typewriter {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 100%; }
+}
 
-   100%{
-      width: 13em;
-   }
- }
- 
- @keyframes caret {
-   50% { border-color: transparent; }
- }
+@keyframes blinkCursor {
+  0%, 50% { border-color: #00ffff; }
+  51%, 100% { border-color: transparent; }
+}
 
- 
- 
+/* 文字區域 */
+.text {
+  background: linear-gradient(135deg, rgba(0, 30, 60, 0.3), rgba(0, 60, 90, 0.3));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 40px;
+  margin: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
 
- 
- 
+.text h2 {
+  font-size: 32px;
+  color: #00ffff;
+  margin-bottom: 25px;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  position: relative;
+}
+
+.text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  transform: translateX(-50%);
+}
+
+.text p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: #b0e0e6;
+  opacity: 0;
+  animation: textFadeIn 0.8s ease-out forwards;
+}
+
+.text p:nth-child(2) { animation-delay: 0.2s; }
+.text p:nth-child(3) { animation-delay: 0.4s; }
+.text p:nth-child(4) { animation-delay: 0.6s; }
+.text p:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes textFadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 聯繫區域 */
+.contact {
+  background: linear-gradient(135deg, rgba(0, 40, 80, 0.4), rgba(0, 80, 120, 0.4));
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  margin: 60px 0;
+}
+
+.contact h3 {
+  font-size: 28px;
+  color: #00ffff;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.contact p {
+  font-size: 20px;
+  color: #87ceeb;
+  font-family: 'Courier New', monospace;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px 25px;
+  border-radius: 10px;
+  display: inline-block;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* 頁腳 */
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid rgba(0, 255, 255, 0.3);
+  margin-top: 60px;
+  position: relative;
+}
+
+footer p {
+  color: #708090;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  main {
+    padding: 20px 15px;
+  }
+  
+  .welcome p {
+    font-size: 18px;
+  }
+  
+  .iconContainer {
+    gap: 25px;
+  }
+  
+  .icon {
+    width: 70px; /* 相應調整手機版圖標大小 */
+    height: 70px;
+  }
+  
+  .greeting {
+    font-size: 36px; /* 相應調整手機版字體大小 */
+  }
+  
+  .text {
+    padding: 25px;
+  }
+  
+  .text h2 {
+    font-size: 26px;
+  }
+  
+  .text p {
+    font-size: 16px;
+  }
+  
+  .contact {
+    padding: 25px;
+  }
+  
+  .contact h3 {
+    font-size: 22px;
+  }
+  
+  .contact p {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome p {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  
+  .iconContainer {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .icon {
+    width: 60px; /* 相應調整小螢幕版圖標大小 */
+    height: 60px;
+  }
+  
+  .greeting {
+    font-size: 28px; /* 相應調整小螢幕版字體大小 */
+  }
+  
+  .text {
+    padding: 20px;
+  }
+  
+  .text h2 {
+    font-size: 22px;
+  }
+  
+  .text p {
+    font-size: 14px;
+  }
+}
