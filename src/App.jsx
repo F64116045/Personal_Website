@@ -39,7 +39,7 @@ function AppContent() {
             to="/projects"
             className={({ isActive }) => "nav-button" + (isActive ? " active" : "")}
           >
-            專案
+            實作/專案經驗
           </NavLink>
           <NavLink
             to="/course"
