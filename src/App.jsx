@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Course from "./pages/Course";
+import Diary from "./pages/Diary";
 import Icon from "./img/Icon.png";
 
 function App() {
@@ -39,13 +40,19 @@ function AppContent() {
             to="/projects"
             className={({ isActive }) => "nav-button" + (isActive ? " active" : "")}
           >
-            專案
+            實作/專案經驗
           </NavLink>
           <NavLink
             to="/course"
             className={({ isActive }) => "nav-button" + (isActive ? " active" : "")}
           >
             修課
+          </NavLink>
+          <NavLink
+            to="/diary"
+            className={({ isActive }) => "nav-button" + (isActive ? " active" : "")}
+          >
+            筆記日誌
           </NavLink>
         </nav>
       </div>
@@ -55,6 +62,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/course" element={<Course />} />
+          <Route path="/diary" element={<Diary/>}/>
         </Routes>
       </div>
     </div>

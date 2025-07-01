@@ -1,15 +1,15 @@
-/* 全局設定與變數 */
+/* 全局設定與變數 - 調整為更深藍色調，減少綠色 */
 :root {
-  --primary-cyan: #00ffff;
-  --secondary-cyan: #00cccc;
-  --accent-green: #00ff80;
-  --accent-blue: #0080ff;
-  --dark-bg: #0a0a0a;
-  --dark-blue: #1a1a2e;
-  --darker-blue: #16213e;
-  --glass-bg: rgba(10, 15, 25, 0.95);
-  --border-glow: rgba(0, 255, 255, 0.3);
-  --text-shadow-glow: rgba(0, 255, 255, 0.3);
+  --primary-cyan: #3fb8cc;
+  --secondary-cyan: #1e8a8a;
+  --accent-green: #4a9b9b;
+  --accent-blue: #3d9ae5;
+  --dark-bg: #0a0a1f;
+  --dark-blue: #151536;
+  --darker-blue: #121a3a;
+  --glass-bg: rgba(10, 15, 31, 0.85);
+  --border-glow: rgba(63, 184, 204, 0.2);
+  --text-shadow-glow: rgba(63, 184, 204, 0.15);
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -23,17 +23,18 @@
 
 body {
   background: 
-    radial-gradient(circle at 20% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 128, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(63, 184, 204, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(61, 154, 229, 0.05) 0%, transparent 50%),
     linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-blue) 50%, var(--darker-blue) 100%);
   background-attachment: fixed;
   font-family: 'Segoe UI', 'Arial', sans-serif;
   color: var(--primary-cyan);
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
 }
 
-/* 動態背景粒子效果 */
+/* 更深藍的動態背景粒子效果 */
 body::before {
   content: '';
   position: fixed;
@@ -42,20 +43,21 @@ body::before {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(2px 2px at 20px 30px, rgba(0, 255, 255, 0.3), transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 255, 0.2), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(0, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(0, 255, 255, 0.2), transparent);
+    radial-gradient(1px 1px at 20px 30px, rgba(63, 184, 204, 0.15), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(63, 184, 204, 0.1), transparent),
+    radial-gradient(0.5px 0.5px at 90px 40px, rgba(63, 184, 204, 0.2), transparent),
+    radial-gradient(0.5px 0.5px at 130px 80px, rgba(63, 184, 204, 0.1), transparent);
   background-repeat: repeat;
-  background-size: 200px 150px;
-  animation: sparkle 20s linear infinite;
+  background-size: 250px 200px;
+  animation: sparkle 25s linear infinite;
   pointer-events: none;
   z-index: -1;
+  opacity: 0.6;
 }
 
 @keyframes sparkle {
   0% { transform: translateY(0px); }
-  100% { transform: translateY(-200px); }
+  100% { transform: translateY(-250px); }
 }
 
 .app-container {
@@ -63,27 +65,27 @@ body::before {
   position: relative;
 }
 
-/* 主導航容器 */
+/* 主導航容器 - 確保固定在頂部 */
 .menu-container {
-  position: fixed;
-  top: 0;
+  position: fixed !important;
+  top: 0 !important;
   left: 0;
   right: 0;
-  z-index: 1000;
+  width: 100%;
+  z-index: 50;
   background: var(--glass-bg);
-  backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(150%);
   border-bottom: 1px solid var(--border-glow);
   box-shadow: 
-    0 8px 32px rgba(0, 255, 255, 0.15),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 4px 20px rgba(63, 184, 204, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
   overflow: hidden;
-  height: 70px;
+  height: 120px;
   transition: var(--transition-smooth);
 }
 
@@ -92,8 +94,8 @@ body::before {
   height: 60px;
   padding: 12px 25px;
   box-shadow: 
-    0 4px 20px rgba(0, 255, 255, 0.2),
-    0 1px 4px rgba(0, 0, 0, 0.4);
+    0 2px 15px rgba(63, 184, 204, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* 頭部容器 */
@@ -102,7 +104,7 @@ body::before {
   z-index: 2;
 }
 
-/* 增強雷射掃描效果 */
+/* 更深藍的雷射掃描效果 */
 .menu-container::before {
   content: '';
   position: absolute;
@@ -113,12 +115,12 @@ body::before {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(0, 255, 255, 0.4),
-    rgba(0, 255, 255, 0.6),
-    rgba(0, 255, 255, 0.4),
+    rgba(63, 184, 204, 0.15),
+    rgba(63, 184, 204, 0.25),
+    rgba(63, 184, 204, 0.15),
     transparent
   );
-  animation: laserScan 4s infinite ease-in-out;
+  animation: laserScan 6s infinite ease-in-out;
 }
 
 .menu-container::after {
@@ -136,7 +138,8 @@ body::before {
     var(--accent-blue),
     transparent
   );
-  animation: borderPulse 3s ease-in-out infinite;
+  animation: borderPulse 4s ease-in-out infinite;
+  opacity: 0.6;
 }
 
 @keyframes laserScan {
@@ -146,8 +149,8 @@ body::before {
 }
 
 @keyframes borderPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
 }
 
 /* 頭部佈局 */
@@ -159,60 +162,32 @@ body::before {
   z-index: 2;
 }
 
-/* 主圖標樣式 */
+/* 更深藍的主圖標樣式 */
 .main-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid var(--primary-cyan);
-  padding: 3px;
-  background: 
-    radial-gradient(circle at 30% 30%, rgba(0, 255, 255, 0.3), transparent 70%),
-    linear-gradient(45deg, #001a1a, #003333, #001a1a);
-  box-shadow: 
-    0 0 20px rgba(0, 255, 255, 0.5),
-    inset 0 0 20px rgba(0, 255, 255, 0.2),
-    0 0 40px rgba(0, 255, 255, 0.3);
-  animation: iconFloat 3s ease-in-out infinite;
+  width: 100px;
+  height: 100px;
+  padding: 0px;
   transition: var(--transition-bounce);
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.main-icon::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(0, 255, 255, 0.3),
-    transparent
-  );
-  animation: iconSpin 4s linear infinite;
-}
+
 
 .main-icon:hover {
-  transform: scale(1.15) rotate(10deg);
-  box-shadow: 
-    0 0 40px rgba(0, 255, 255, 0.8),
-    inset 0 0 40px rgba(0, 255, 255, 0.3),
-    0 0 60px rgba(0, 255, 255, 0.5);
+  transform: scale(1.1) rotate(3deg);
   border-color: var(--accent-green);
 }
 
 @keyframes iconFloat {
   0%, 100% { 
     transform: translateY(0px) rotate(0deg);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(63, 184, 204, 0.3), inset 0 0 15px rgba(63, 184, 204, 0.1);
   }
   50% { 
-    transform: translateY(-3px) rotate(2deg);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), inset 0 0 30px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px) rotate(1deg);
+    box-shadow: 0 0 20px rgba(63, 184, 204, 0.4), inset 0 0 20px rgba(63, 184, 204, 0.15);
   }
 }
 
@@ -221,10 +196,10 @@ body::before {
   100% { transform: rotate(360deg); }
 }
 
-/* HUANG SHUO 文字樣式 */
+/* 更深藍的 HUANG SHUO 文字樣式 */
 .header > div {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 45px;
+  font-weight: 750;
   background: linear-gradient(
     45deg, 
     var(--primary-cyan), 
@@ -232,14 +207,14 @@ body::before {
     var(--accent-blue),
     var(--primary-cyan)
   );
-  background-size: 300% 300%;
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: textShimmer 4s ease-in-out infinite;
+  animation: textShimmer 5s ease-in-out infinite;
   text-shadow: 
-    0 0 20px var(--text-shadow-glow),
-    0 0 40px rgba(0, 255, 255, 0.2);
+    0 0 10px var(--text-shadow-glow),
+    0 0 20px rgba(63, 184, 204, 0.1);
   position: relative;
   letter-spacing: 2px;
   font-variant: small-caps;
@@ -251,7 +226,7 @@ body::before {
   bottom: -4px;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(
     90deg, 
     transparent, 
@@ -260,25 +235,26 @@ body::before {
     var(--accent-blue),
     transparent
   );
-  border-radius: 2px;
-  animation: underlineFlow 3s ease-in-out infinite;
+  border-radius: 1px;
+  animation: underlineFlow 4s ease-in-out infinite;
+  opacity: 0.7;
 }
 
 @keyframes textShimmer {
   0%, 100% { background-position: 0% 50%; }
   25% { background-position: 100% 0%; }
-  50% { background-position: 200% 50%; }
+  50% { background-position: 150% 50%; }
   75% { background-position: 100% 100%; }
 }
 
 @keyframes underlineFlow {
   0%, 100% { 
-    opacity: 0.4; 
-    transform: scaleX(0.8);
+    opacity: 0.5; 
+    transform: scaleX(0.9);
   }
   50% { 
-    opacity: 1; 
-    transform: scaleX(1.1);
+    opacity: 0.9; 
+    transform: scaleX(1.05);
   }
 }
 
@@ -290,7 +266,7 @@ body::before {
   position: relative;
 }
 
-/* 導航按鈕樣式 */
+/* 更深藍的導航按鈕樣式 */
 .nav-button {
   position: relative;
   padding: 12px 24px;
@@ -301,20 +277,20 @@ body::before {
   border: 1px solid transparent;
   border-radius: 8px;
   background: 
-    linear-gradient(145deg, rgba(0, 30, 60, 0.7), rgba(0, 50, 80, 0.5)),
-    linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
-  backdrop-filter: blur(15px);
+    linear-gradient(145deg, rgba(21, 21, 54, 0.6), rgba(18, 26, 58, 0.4)),
+    linear-gradient(45deg, transparent, rgba(63, 184, 204, 0.03), transparent);
+  backdrop-filter: blur(12px);
   transition: var(--transition-smooth);
   overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   cursor: pointer;
   box-shadow: 
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* 按鈕內部光效 */
+/* 更深藍的按鈕內部光效 */
 .nav-button::before {
   content: '';
   position: absolute;
@@ -325,9 +301,9 @@ body::before {
   background: linear-gradient(
     90deg, 
     transparent, 
-    rgba(0, 255, 255, 0.4), 
-    rgba(0, 255, 255, 0.6),
-    rgba(0, 255, 255, 0.4),
+    rgba(63, 184, 204, 0.2), 
+    rgba(63, 184, 204, 0.3),
+    rgba(63, 184, 204, 0.2),
     transparent
   );
   transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -340,7 +316,7 @@ body::before {
   left: 50%;
   width: 0;
   height: 0;
-  background: radial-gradient(circle, rgba(0, 255, 255, 0.3), transparent 70%);
+  background: radial-gradient(circle, rgba(63, 184, 204, 0.15), transparent 70%);
   border-radius: 50%;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate(-50%, -50%);
@@ -351,87 +327,119 @@ body::before {
 }
 
 .nav-button:hover::after {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 
 .nav-button:hover {
   color: var(--primary-cyan);
   border-color: var(--primary-cyan);
   box-shadow: 
-    0 8px 30px rgba(0, 255, 255, 0.4),
-    inset 0 0 30px rgba(0, 255, 255, 0.15),
-    0 0 60px rgba(0, 255, 255, 0.2);
-  transform: translateY(-3px) scale(1.05);
+    0 4px 20px rgba(63, 184, 204, 0.2),
+    inset 0 0 20px rgba(63, 184, 204, 0.08),
+    0 0 30px rgba(63, 184, 204, 0.1);
+  transform: translateY(-2px) scale(1.02);
   background: 
-    linear-gradient(145deg, rgba(0, 40, 80, 0.8), rgba(0, 60, 100, 0.6)),
-    linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+    linear-gradient(145deg, rgba(21, 21, 54, 0.7), rgba(18, 26, 58, 0.5)),
+    linear-gradient(45deg, transparent, rgba(63, 184, 204, 0.06), transparent);
 }
 
-/* 活躍按鈕樣式 */
+/* 更深藍的活躍按鈕樣式 - 只有自體發光 */
 .nav-button.active {
   color: var(--primary-cyan);
   border-color: var(--primary-cyan);
   background: 
-    linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 180, 255, 0.15)),
-    linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+    linear-gradient(145deg, rgba(63, 184, 204, 0.15), rgba(61, 154, 229, 0.12)),
+    linear-gradient(45deg, rgba(63, 184, 204, 0.08), rgba(61, 154, 229, 0.08));
   box-shadow: 
-    0 6px 25px rgba(0, 255, 255, 0.5),
-    inset 0 0 25px rgba(0, 255, 255, 0.2),
-    0 0 50px rgba(0, 255, 255, 0.3);
-  transform: translateY(-2px);
+    0 0 20px rgba(63, 184, 204, 0.4),
+    0 0 40px rgba(63, 184, 204, 0.2),
+    inset 0 0 20px rgba(63, 184, 204, 0.15);
+  transform: translateY(-1px);
+  animation: activeButtonGlow 2.5s ease-in-out infinite;
 }
 
-.nav-button.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
+@keyframes activeButtonGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px rgba(63, 184, 204, 0.4),
+      0 0 40px rgba(63, 184, 204, 0.2),
+      inset 0 0 20px rgba(63, 184, 204, 0.15);
+  }
+  50% { 
+    box-shadow: 
+      0 0 30px rgba(63, 184, 204, 0.6),
+      0 0 60px rgba(63, 184, 204, 0.3),
+      inset 0 0 30px rgba(63, 184, 204, 0.25);
+  }
+}
+
+/* 內容區域 - 解放布局 */
+.content {
+  margin-top: 120px;
+  padding: 30px 20px;
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 70px);
   width: 100%;
+}
+
+.content h1 {
+  color: var(--primary-cyan);
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
   background: linear-gradient(
-    90deg, 
+    45deg, 
     var(--primary-cyan), 
     var(--accent-green), 
     var(--accent-blue),
     var(--primary-cyan)
   );
-  border-radius: 2px 2px 0 0;
-  animation: activeGlow 2.5s ease-in-out infinite;
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 5s ease-in-out infinite;
 }
 
-@keyframes activeGlow {
-  0%, 100% { 
-    opacity: 0.6; 
-    transform: scaleX(0.9);
-  }
-  50% { 
-    opacity: 1; 
-    transform: scaleX(1.1);
-  }
+.content p {
+  color: rgba(63, 184, 204, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 1200px;
+  margin: 0 auto 2rem auto;
+  text-align: left;
 }
 
-/* 內容區域 */
-.content {
-  margin-top: 70px;
-  padding: 40px;
-  position: relative;
-  z-index: 1;
-  min-height: calc(100vh - 70px);
+.content .intro-section {
+  text-align: center;
+  margin-bottom: 4rem;
 }
 
-/* 滾動條美化 */
+.content .scroll-demo {
+  height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: rgba(63, 184, 204, 0.6);
+  font-size: 1.1rem;
+}
+
+/* 更深藍的滾動條美化 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--primary-cyan), var(--accent-blue));
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(63, 184, 204, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -488,6 +496,10 @@ body::before {
     margin-top: 140px;
     padding: 30px 20px;
   }
+  
+  .content h1 {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -519,6 +531,14 @@ body::before {
   .content {
     margin-top: 200px;
     padding: 25px 15px;
+  }
+  
+  .content h1 {
+    font-size: 2rem;
+  }
+  
+  .content p {
+    font-size: 1rem;
   }
 }
 
