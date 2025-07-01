@@ -1,7 +1,7 @@
-/* Projects 頁面全局樣式 */
+/* Projects 頁面全局樣式 - 優化版 */
 .projects-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a2463 100%);
+  background: linear-gradient(135deg, #0a0a0a75 0%, #1a1a2e71 50%, #16213e79 100%);
   padding: 60px 20px;
   position: relative;
   overflow-x: hidden;
@@ -12,7 +12,7 @@
   margin: 0 auto;
 }
 
-/* 背景動態效果 */
+/* 背景動態效果 - 更柔和 */
 .projects-container::before {
   content: '';
   position: fixed;
@@ -20,56 +20,52 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(0, 255, 128, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(0, 128, 255, 0.06) 0%, transparent 50%);
-  animation: backgroundPulse 8s ease-in-out infinite;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(34, 139, 139, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 75% 75%, rgba(0, 128, 128, 0.06) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(72, 139, 139, 0.05) 0%, transparent 60%),
+    url('../img/ProjectBIMG.png');
+  animation: backgroundPulse 12s ease-in-out infinite;
   z-index: -1;
 }
 
 @keyframes backgroundPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
 }
 
-/* 載入動畫 */
+/* 載入文字 - 無閃爍 */
 .projects-container p {
-  color: #00ffff;
+  color: #4dd0e1;
   font-size: 24px;
   text-align: center;
   margin-top: 100px;
-  animation: loadingPulse 2s ease-in-out infinite;
-  grid-column: 1 / -1; /* 載入文字橫跨整行 */
+  opacity: 0.8;
+  grid-column: 1 / -1;
 }
 
-@keyframes loadingPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-/* 專案卡片樣式 */
+/* 專案卡片樣式 - 沉穩配色 */
 .project {
   background: linear-gradient(145deg, 
-    rgba(0, 30, 60, 0.4), 
-    rgba(0, 60, 90, 0.3), 
-    rgba(0, 40, 80, 0.4)
+    rgba(13, 25, 39, 0.6), 
+    rgba(21, 38, 52, 0.5), 
+    rgba(15, 32, 48, 0.6)
   );
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(77, 208, 225, 0.15);
+  border-radius: 16px;
   padding: 30px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   height: fit-content;
 }
 
-/* 卡片懸浮動畫 */
+/* 卡片懸浮動畫 - 更微妙 */
 .project::before {
   content: '';
   position: absolute;
@@ -79,10 +75,10 @@
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(0, 255, 255, 0.1), 
+    rgba(77, 208, 225, 0.06), 
     transparent
   );
-  transition: left 0.6s ease;
+  transition: left 0.8s ease;
 }
 
 .project:hover::before {
@@ -90,21 +86,21 @@
 }
 
 .project:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(0, 255, 255, 0.5);
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(77, 208, 225, 0.3);
   box-shadow: 
-    0 20px 40px rgba(0, 255, 255, 0.15),
-    0 0 30px rgba(0, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 12px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(77, 208, 225, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* 專案標題 */
+/* 專案標題 - 柔和發光 */
 .project-header {
   font-size: 28px;
   font-weight: bold;
-  color: #00ffff;
+  color: #4dd0e1;
   margin-bottom: 15px;
-  text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  text-shadow: 0 0 8px rgba(77, 208, 225, 0.3);
   position: relative;
   z-index: 2;
 }
@@ -112,26 +108,27 @@
 /* 專案簡介 */
 .project-intro {
   font-size: 16px;
-  color: #87ceeb;
-  opacity: 0.8;
+  color: #ffffff7a;
+  opacity: 0.85;
   font-style: italic;
   position: relative;
   z-index: 2;
 }
 
-/* Modal 背景 */
+
+/* Modal 背景 - 覆蓋整個視窗包括導航列 */
 .project-modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999999; /* 確保在所有元素之上 */
   animation: modalFadeIn 0.3s ease-out;
 }
 
@@ -140,29 +137,31 @@
   to { opacity: 1; }
 }
 
-/* Modal 內容 */
+/* Modal 內容 - 確保在正確層級 */
 .project-modal-content {
+  position: fixed;
   background: linear-gradient(145deg, 
-    rgba(10, 20, 40, 0.95), 
-    rgba(15, 35, 60, 0.95), 
-    rgba(20, 40, 80, 0.95)
+    rgba(13, 17, 23, 0.96), 
+    rgba(22, 27, 34, 0.96), 
+    rgba(33, 38, 45, 0.96)
   );
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  border-radius: 25px;
+  backdrop-filter: blur(15px);
+  border: 1.5px solid rgba(77, 208, 225, 0.2);
+  border-radius: 20px;
   padding: 40px;
   max-width: 90%;
   max-height: 90%;
   overflow-y: auto;
   position: relative;
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(0, 255, 255, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(77, 208, 225, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: modalSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10000;/* 確保內容在Modal背景之上 */
 }
 
-/* 背景圖片效果 */
+/* 背景圖片效果 - 更低透明度 */
 .project-modal-content::before {
   content: '';
   position: absolute;
@@ -174,15 +173,15 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.1;
-  border-radius: 25px;
+  opacity: 0.05;
+  border-radius: 20px;
   z-index: -1;
 }
 
 @keyframes modalSlideIn {
   from { 
     opacity: 0; 
-    transform: translateY(-50px) scale(0.9); 
+    transform: translateY(-30px) scale(0.95); 
   }
   to { 
     opacity: 1; 
@@ -190,103 +189,100 @@
   }
 }
 
-/* 關閉按鈕 */
+/* 關閉按鈕 - 確保在最上層 */
 .close-button {
   position: absolute;
   top: 20px;
   right: 25px;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  color: #00ffff;
+  color: #4dd0e1;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(0, 40, 80, 0.6);
-  border: 2px solid rgba(0, 255, 255, 0.3);
+  background: rgba(33, 38, 45, 0.8);
+  border: 1px solid rgba(77, 208, 225, 0.2);
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 10001; /* 確保在Modal之上 */
 }
 
 .close-button:hover {
-  background: rgba(0, 255, 255, 0.2);
-  border-color: #00ffff;
+  background: rgba(77, 208, 225, 0.15);
+  border-color: #4dd0e1;
   transform: rotate(90deg);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(77, 208, 225, 0.2);
 }
 
-/* Modal 標題 */
+/* Modal 標題 - 柔和發光 */
 .project-modal-content h1 {
-  color: #00ffff;
+  color: #4dd0e1;
   font-size: 32px;
   margin-bottom: 20px;
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+  text-shadow: 0 0 8px rgba(77, 208, 225, 0.4);
   text-align: center;
 }
 
-/* 分隔線 */
+/* 分隔線 - 靜態漸變 */
 .project-modal-content hr {
   border: none;
   height: 2px;
   background: linear-gradient(90deg, 
     transparent, 
-    #00ffff, 
-    rgba(0, 255, 128, 0.8), 
-    #0080ff, 
+    rgba(77, 208, 225, 0.6), 
+    rgba(129, 199, 132, 0.4), 
+    rgba(77, 208, 225, 0.6), 
     transparent
   );
   margin: 25px 0;
-  animation: linePulse 3s ease-in-out infinite;
+  opacity: 0.8;
 }
 
-@keyframes linePulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-/* 連結樣式 */
+/* 連結樣式 - 青綠色調 */
 .project-modal-content p {
-  color: #b0e0e6;
+  color: #b3e5fc;
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 20px;
 }
 
 .project-modal-content a {
-  color: #00ffff;
+  color: #4dd0e1;
   text-decoration: none;
   padding: 8px 16px;
-  background: rgba(0, 255, 255, 0.1);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  border-radius: 20px;
+  background: rgba(77, 208, 225, 0.08);
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  border-radius: 16px;
   transition: all 0.3s ease;
   display: inline-block;
   margin-left: 10px;
 }
 
 .project-modal-content a:hover {
-  background: rgba(0, 255, 255, 0.2);
-  border-color: #00ffff;
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-  transform: translateY(-2px);
+  background: rgba(77, 208, 225, 0.15);
+  border-color: rgba(77, 208, 225, 0.4);
+  box-shadow: 0 0 10px rgba(77, 208, 225, 0.2);
+  transform: translateY(-1px);
 }
 
-/* Markdown 內容樣式 */
+/* Markdown 內容樣式 - 護眼配色 */
 .rich-text.markdown-body {
-  color: #e0f6ff;
+  color: #ffffff;
   font-size: 16px;
   line-height: 1.8;
   margin-top: 30px;
 }
 
 .markdown-body h1, .markdown-body h2, .markdown-body h3 {
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  color: #ffffff;
   margin-top: 30px;
   margin-bottom: 15px;
+  border-left: 4px solid #4dd0e1;
+  padding-left: 15px;
+  border-bottom: 1px solid #87dffe;
 }
 
 .markdown-body h1 { font-size: 28px; }
@@ -295,33 +291,33 @@
 
 .markdown-body p {
   margin-bottom: 16px;
-  color: #b0e0e6;
+  color: #ffffff;
 }
 
 .markdown-body code {
-  background: rgba(0, 40, 80, 0.6);
-  color: #00ff80;
+  background: rgba(33, 38, 45, 0.8);
+  color: #81c784;
   padding: 3px 8px;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: 'Courier New', monospace;
-  border: 1px solid rgba(0, 255, 128, 0.2);
+  border: 1px solid rgba(129, 199, 132, 0.15);
 }
 
 .markdown-body pre {
-  background: rgba(0, 20, 40, 0.8);
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  border-radius: 10px;
+  background: rgba(13, 17, 23, 0.9);
+  border: 1px solid rgba(77, 208, 225, 0.15);
+  border-radius: 8px;
   padding: 20px;
   overflow-x: auto;
   margin: 20px 0;
 }
 
 .markdown-body blockquote {
-  border-left: 4px solid #00ffff;
-  background: rgba(0, 40, 80, 0.3);
+  border-left: 3px solid #ffffff;
+  background: rgba(33, 38, 45, 0.4);
   padding: 15px 20px;
   margin: 20px 0;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .markdown-body ul, .markdown-body ol {
@@ -331,14 +327,14 @@
 
 .markdown-body li {
   margin-bottom: 8px;
-  color: #b0e0e6;
+  color: #ffffff;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
   .projects-container {
     padding: 30px 15px;
-    grid-template-columns: 1fr; /* 手機版改為單欄 */
+    grid-template-columns: 1fr;
     gap: 20px;
   }
   
@@ -367,9 +363,9 @@
   .close-button {
     top: 15px;
     right: 15px;
-    width: 35px;
-    height: 35px;
-    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
   }
   
   .markdown-body h1 { font-size: 24px; }
