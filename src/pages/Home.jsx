@@ -12,9 +12,7 @@ const Home = () => {
 
       <main>
         
-        
 
-      
         <section className="iconContainer">
           <a href="https://github.com/F64116045" target="_blank" rel="noopener noreferrer">
             <img src={githubIcon} alt="GitHub" className="icon"/>
@@ -33,8 +31,15 @@ const Home = () => {
 
         <section className ="text">
           <h2>關於我</h2>
-          <p>我是黃朔</p>
-          <p>目前就讀於國立成功大學 測量及空間資訊學系 / 資訊工程學系 (雙主修)。</p>
+          <p>你好，我是黃朔</p>
+          <div className="School">
+            <div >目前就讀於 國立成功大學 </div>
+              <div className="Major">
+                <div>測量及空間資訊學系</div>
+                <div>資訊工程學系</div>
+              </div>
+            <div> (雙主修)</div>
+          </div>
           <p>在大學期間發現自己對於CS領域有興趣</p>
           <p>目前正積極學習軟體工程相關知識</p>
         </section>
@@ -42,7 +47,7 @@ const Home = () => {
 
         <section className ="contact">
           <h3>聯繫我</h3>
-          <p>F64116045@gs.ncku.edu.tw。</p>
+          <p>F64116045@gs.ncku.edu.tw</p>
         </section>
       </main>
 

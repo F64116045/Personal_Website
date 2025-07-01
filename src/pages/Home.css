@@ -1,33 +1,34 @@
 /* Home 頁面全局樣式 */
 .home {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  background: linear-gradient(135deg, #0a0a0a75 0%, #1a1a2e71 50%, #16213e79 100%);
+  border-radius: 20px;
   color: #00ffff;
   position: relative;
   overflow-x: hidden;
 }
 
-/* 背景動態粒子效果 */
 .home::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(2px 2px at 20px 30px, rgba(0, 255, 255, 0.3), transparent),
-    radial-gradient(2px 2px at 40px 70px, rgba(0, 255, 128, 0.3), transparent),
-    radial-gradient(1px 1px at 90px 40px, rgba(0, 128, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 130px 80px, rgba(0, 255, 255, 0.3), transparent);
-  background-size: 200px 200px;
-  animation: particleFloat 20s linear infinite;
+  height: 300%; /* 兩倍高度 */
+  background: url('../img/HomeBackG.png') repeat center top;
+  background-size: 50 auto; /* 不是 over，要寫 cover */
+  animation: scrollBackground 25s linear infinite;
   z-index: -1;
+  opacity: 0.25;
 }
 
-@keyframes particleFloat {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-200px); }
+@keyframes scrollBackground {
+  0% {
+    background-position: center 0;
+  }
+  100% {
+    background-position: center -100%;
+  }
 }
 
 /* 主要內容區域 */
@@ -90,30 +91,31 @@ main {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin: 60px 0;
+  margin: 0 0;
   position: relative;
 }
 
 /* 圖標樣式（放大尺寸） */
 .icon {
-  width: 80px; /* 從60px增加到80px */
-  height: 80px; /* 從60px增加到80px */
+  width: 90px; /* 從60px增加到80px */
+  height: 90px; /* 從60px增加到80px */
   border-radius: 50%;
   padding: 10px; /* 從8px增加到10px */
-  background: linear-gradient(45deg, rgba(0, 30, 60, 0.8), rgba(0, 60, 90, 0.8));
+  background: linear-gradient(45deg,rgba(119, 202, 244, 0.271), rgba(172, 200, 228, 0.106), rgba(119, 202, 244, 0.682));
   border: 2px solid transparent;
   background-clip: padding-box;
   transition: all 0.4s ease;
   position: relative;
   z-index: 2;
   cursor: pointer;
-  animation: iconFloatSmooth 3s ease-in-out infinite;
+  /*animation: iconFloatSmooth 3s ease-in-out infinite;*/
 }
 
 .icon:hover {
-  transform: scale(1.1);
+  animation: iconRotate 1.2s ease-in-out;
+  transform: scale(1.2);
   box-shadow: 
-    0 0 1px rgba(0, 255, 255, 0.6),
+    0 0 1px rgb(0, 255, 255),
     inset 0 0 1px rgba(0, 255, 255, 0.2);
   border-color: #00ffff;
 }
@@ -132,9 +134,17 @@ main {
 
 @keyframes iconFloatSmooth {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
 }
 
+@keyframes iconRotate {
+  0% {
+    transform: scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.2) rotate(720deg);
+  }
+}
 /* 問候語容器 - 打字機效果（放慢速度，增大字體） */
 .greeting-container {
   text-align: center;
@@ -200,11 +210,30 @@ main {
 
 .text p {
   font-size: 18px;
+  font-weight: 500;
   line-height: 1.8;
   margin-bottom: 15px;
-  color: #b0e0e6;
+  text-align: center;
+  color: #ffffff;
   opacity: 0;
   animation: textFadeIn 0.8s ease-out forwards;
+}
+
+.School{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;         /* 垂直置中（上下方向） */
+  margin-bottom: 15px;
+  line-height: 1.8;
+  font-size: 18px;
+  color: #ffffff;
+  animation: textFadeIn 0.8s ease-out forwards;
+  font-weight: 500;
+}
+
+.Major{
+  margin-left: 15px;
 }
 
 .text p:nth-child(2) { animation-delay: 0.2s; }
