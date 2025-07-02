@@ -2,6 +2,7 @@ import './Course.css';
 import { useEffect, useState } from 'react';
 import { supabase } from '.././supabase';
 import ReactDOM from 'react-dom'; 
+import LoadingScreen from '../component/LoadingScreen';
 
 function CourseModal({selectedCourse, setSelectedCourse}){
   if(!selectedCourse) return null;
@@ -72,7 +73,7 @@ function Course() {
     <div className="Course-container">
       <div className="course-text">修習過的程式設計 / 資訊工程領域 相關課程</div>
       <div>
-        {loading && <p>資料載入中...</p>}
+        {loading && <LoadingScreen/>}
         {!loading && courses.length === 0 && <p>目前沒有課程資料</p>}
         {!loading && courses.map(course => {
           const { Course_id, Course_name, Course_grade } = course;

@@ -1,67 +1,78 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import { supabase } from '../supabase';
 import './Diary.css';
 import { createPortal } from 'react-dom';
-import { supabase } from "../supabase";
 import ReactMarkdown from 'react-markdown';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { TOC, extractHeadings, useActiveHeader } from './MarkdownTOC';
+import { TOC, getRenderedHeadings, useActiveHeader } from './MarkdownTOC';
 import remarkMath from 'remark-math';
+import rehypeSlug from 'rehype-slug';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import LoadingScreen from '../component/LoadingScreen'; // 若有 loading 畫面
 
 export function Diary_modal({ selectedDiary, setSelectedDiary }) {
-  const [shouldRender, setShouldRender] = useState(false);
+    const [shouldRender, setShouldRender] = useState(false);
+    const [headings, setHeadings] = useState([]);
+    const markdownRef = useRef(null);
 
-  const content = typeof selectedDiary?.Diary_content === 'string'
-    ? selectedDiary.Diary_content
-    : '';
-  const headings = extractHeadings(content);
-  const activeId = useActiveHeader(headings);
+    const content =
+        typeof selectedDiary?.Diary_content === 'string'
+        ? selectedDiary.Diary_content
+        : '';
 
-  useEffect(() => {
-    if (!selectedDiary) return;
-    const timer = setTimeout(() => setShouldRender(true), 300);
-    return () => {
-      clearTimeout(timer);
-      setShouldRender(false);
-    };
-  }, [selectedDiary]);
+    // 控制是否顯示 loading
+    useEffect(() => {
+        if (!selectedDiary) return;
+        setShouldRender(false);
+        const timer = setTimeout(() => setShouldRender(true), 200);
+        return () => clearTimeout(timer);
+    }, [selectedDiary]);
 
-  if (!selectedDiary || typeof window === 'undefined' || !document?.body) return null;
+    // 抓 headings
+    useEffect(() => {
+        if (!shouldRender) return;
+        const timer = setTimeout(() => {
+        const result = getRenderedHeadings(); // 根據渲染後的 DOM 擷取
+        setHeadings(result);
+        }, 100);
+        return () => clearTimeout(timer);
+    }, [shouldRender, content]);
 
-  return createPortal(
-    <div className="diary-modal-overlay" onClick={() => setSelectedDiary(null)}>
-        <div className="diary-modal-content" onClick={(e) => e.stopPropagation()}>
-        <h1>{selectedDiary.Diary_title}</h1>
-        <span className="close-button" onClick={() => setSelectedDiary(null)}>X</span>
+    const activeId = useActiveHeader(headings);
 
-        <div className="diary-modal-layout">
+        if (!selectedDiary || typeof window === 'undefined') return null;
+
+    return createPortal(
+        <div className="diary-modal-overlay" onClick={() => setSelectedDiary(null)}>
+        <div className="diary-modal-content" onClick={e => e.stopPropagation()}>
+            <h1>{selectedDiary.Diary_title}</h1>
+            <span className="close-button" onClick={() => setSelectedDiary(null)}>X</span>
+
+            <div className="diary-modal-layout">
             {shouldRender ? (
-            <>
+                <>
                 <div className="toc">
-                <TOC headings={headings} activeId={activeId} />
+                    <TOC headings={headings} activeId={activeId} />
                 </div>
-                <div className="markdown-content rich-text markdown-body">
-                <ReactMarkdown
+                <div
+                    className="markdown-content rich-text markdown-body"
+                    ref={markdownRef}
+                >
+                    <ReactMarkdown
                     remarkPlugins={[remarkMath]}
                     rehypePlugins={[rehypeSlug, rehypeKatex]}
-                >
+                    >
                     {content}
-                </ReactMarkdown>
+                    </ReactMarkdown>
                 </div>
-            </>
+                </>
             ) : (
-            <div style={{ padding: '2rem', textAlign: 'center', width: '100%' }}>
-                <p style={{ fontSize: '18px', animation: 'blink 1.2s infinite' }}>
-                內容加載中...
-                </p>
-            </div>
+                <LoadingScreen />
             )}
+            </div>
         </div>
-        </div>
-    </div>,
-    document.body
+        </div>,
+        document.body
     );
 }
 
@@ -77,7 +88,7 @@ function Diary() {
       const { data, error } = await supabase
         .from('Diary')
         .select('*')
-        .order('Diary_time', { descending: true });
+        .order('Diary_time', { ascending: true });
 
       if (error) {
         console.error('Supabase 錯誤 : ', error);
@@ -91,7 +102,7 @@ function Diary() {
     fetchData();
   }, []);
 
-  if (loading) return <p>載入中...</p>;
+  if (loading) return <LoadingScreen/>;
 
   return (
     <div className="Diary-page">

@@ -1,10 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState , useRef} from 'react';
 import ReactDOM from 'react-dom';  // 引入 ReactDOM.createPortal
 import { supabase } from '../supabase';
 import ReactMarkdown from 'react-markdown';
 import './Projects.css';
+import '../component/LoadingScreen'
+import LoadingScreen from '../component/LoadingScreen';
+import { TOC,  useActiveHeader, getRenderedHeadings } from './MarkdownTOC';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeSlug from 'rehype-slug';
+import 'katex/dist/katex.min.css';
 
 function ProjectModal({ selectedProject, closeModal }) {
+  const [shouldRender, setShouldRender] = useState(false);
+  const [headings, setHeadings] = useState([]);
+  const markdownRef = useRef(null);
+
+  const Detail = typeof selectedProject?.Project_Detail === 'string'
+    ? selectedProject.Project_Detail
+    : '';
+
+  // 控制是否顯示內容（與 Diary.js 相同的模式）
+  useEffect(() => {
+    if (!selectedProject) return;
+    setShouldRender(false);
+    const timer = setTimeout(() => setShouldRender(true), 200);
+    return () => clearTimeout(timer);
+  }, [selectedProject]);
+
+  // 抓取 headings（與 Diary.js 相同的模式）
+  useEffect(() => {
+    if (!shouldRender) return;
+    const timer = setTimeout(() => {
+      const result = getRenderedHeadings();
+      setHeadings(result);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [shouldRender, Detail]);
+
+  const activeId = useActiveHeader(headings);
+
   if (!selectedProject) return null;
 
   return ReactDOM.createPortal(
@@ -18,17 +53,35 @@ function ProjectModal({ selectedProject, closeModal }) {
         <span className="close-button" onClick={closeModal}>X</span>
         <h1>{selectedProject.Project_name}</h1>
         <hr />
-        <div className="rich-text markdown-body">
-          <ReactMarkdown>{selectedProject.Project_Detail || '無詳細資料'}</ReactMarkdown>
+
+        <div className="project-modal-layout">
+          {shouldRender ? (
+            <>
+              <div className="toc">
+                <TOC headings={headings} activeId={activeId} />
+              </div>
+
+              <div className="markdown-content rich-text markdown-body" ref={markdownRef}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkMath]}
+                  rehypePlugins={[rehypeSlug, rehypeKatex]}
+                >
+                  {Detail || '無詳細資料'}
+                </ReactMarkdown>
+
+                {selectedProject.Project_Link && (
+                  <p>
+                    <a href={selectedProject.Project_Link} target="_blank" rel="noopener noreferrer">
+                      {selectedProject.Project_Link}
+                    </a>
+                  </p>
+                )}
+              </div>
+            </>
+          ) : (
+            <LoadingScreen />
+          )}
         </div>
-        {selectedProject.Project_Link && (
-          <p>
-            {' '}
-            <a href={selectedProject.Project_Link} target="_blank" rel="noopener noreferrer">
-              {selectedProject.Project_Link}
-            </a>
-          </p>
-        )}
       </div>
     </div>,
     document.body
@@ -67,7 +120,7 @@ function Projects() {
   if (loading) {
     return (
       <div className="projects-container">
-        <p>資料載入中...</p>
+        <LoadingScreen/>
       </div>
     );
   }
@@ -81,7 +134,6 @@ function Projects() {
         </div>
       ))}
 
-      {/* 使用 Portal 呈現 Modal */}
       {modalVisible && selectedProject && (
         <ProjectModal selectedProject={selectedProject} closeModal={closeModal} />
       )}
