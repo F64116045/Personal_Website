@@ -20,7 +20,7 @@ function ProjectModal({ selectedProject, closeModal }) {
     ? selectedProject.Project_Detail
     : '';
 
-  // 控制是否顯示內容（與 Diary.js 相同的模式）
+
   useEffect(() => {
     if (!selectedProject) return;
     setShouldRender(false);
@@ -28,7 +28,7 @@ function ProjectModal({ selectedProject, closeModal }) {
     return () => clearTimeout(timer);
   }, [selectedProject]);
 
-  // 抓取 headings（與 Diary.js 相同的模式）
+
   useEffect(() => {
     if (!shouldRender) return;
     const timer = setTimeout(() => {

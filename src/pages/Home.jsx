@@ -5,7 +5,7 @@ import githubIcon from '../img/Github.png';
 import gmailIcon from '../img/Email.png';
 import Discord from '../img/Discord.webp';
 import { Link } from "react-router-dom";
-import LoadingScreen from '../component/LoadingScreen'; // ⬅️ 載入你酷炫的 loading 畫面組件
+import LoadingScreen from '../component/LoadingScreen'; 
 
 const Home = () => {
   const [shouldRender, setShouldRender] = useState(false);
@@ -52,8 +52,10 @@ const Home = () => {
             </div>
             <div> (雙主修)</div>
           </div>
-          <p>在大學期間發現自己對於CS領域有興趣</p>
-          <p>目前正積極學習軟體工程相關知識</p>
+          <p>在大學期間逐漸發現自己對於CS領域有興趣</p>
+          <p>目前正積極學習軟體開發相關知識</p>
+          <p>近期開始關注一些 AI 工具與 LLM 的應用</p>
+          <p>對底層系統設計、效能優化以及大型系統的可靠性維護等課題也很感興趣</p>
         </section>
 
         <section className="contact">

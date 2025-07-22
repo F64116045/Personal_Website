@@ -1,4 +1,4 @@
-/* Projects 頁面全局樣式 - 優化版 */
+
 .projects-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a75 0%, #1a1a2e71 50%, #16213e79 100%);
@@ -12,7 +12,7 @@
   margin: 0 auto;
 }
 
-/* 背景動態效果 - 更柔和 */
+
 .projects-container::before {
   content: '';
   position: fixed;
@@ -34,7 +34,7 @@
   50% { opacity: 0.4; }
 }
 
-/* 載入文字 - 無閃爍 */
+
 .projects-container p {
   color: #4dd0e1;
   font-size: 24px;
@@ -44,7 +44,7 @@
   grid-column: 1 / -1;
 }
 
-/* 專案卡片樣式 - 沉穩配色 */
+
 .project {
   background: linear-gradient(145deg, 
     rgba(13, 25, 39, 0.6), 
@@ -66,7 +66,7 @@
 
 }
 
-/* 卡片懸浮動畫 - 更微妙 */
+
 .project::before {
   content: '';
   position: absolute;
@@ -98,7 +98,7 @@
 
 
 
-/* 專案標題 - 柔和發光 */
+
 .project-header {
   font-size: 28px;
   font-weight: bold;
@@ -116,7 +116,7 @@
 }
 
 
-/* 專案簡介 */
+
 .project-intro {
   font-size: 16px;
   color: #ffffff7a;
@@ -127,7 +127,7 @@
 }
 
 
-/* Modal 背景 - 覆蓋整個視窗包括導航列 */
+
 .project-modal {
   position: fixed;
   top: 0;
@@ -139,7 +139,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999999; /* 確保在所有元素之上 */
+  z-index: 9999999; 
   animation: modalFadeIn 0.3s ease-out;
 }
 
@@ -148,7 +148,7 @@
   to { opacity: 1; }
 }
 
-/* Modal 內容 - 確保在正確層級 */
+
 .project-modal-content {
   display:flex;
   flex-direction: column;
@@ -170,10 +170,10 @@
     0 0 30px rgba(77, 208, 225, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   animation: modalSlideIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 10000;/* 確保內容在Modal背景之上 */
+  z-index: 10000;
 }
 
-/* 背景圖片效果 - 更低透明度 */
+
 .project-modal-content::before {
   content: '';
   position: absolute;
@@ -201,7 +201,7 @@
   }
 }
 
-/* 關閉按鈕 - 確保在最上層 */
+
 .close-button {
   position: absolute;
   top: 20px;
@@ -219,7 +219,7 @@
   background: rgba(33, 38, 45, 0.8);
   border: 1px solid rgba(77, 208, 225, 0.2);
   transition: all 0.3s ease;
-  z-index: 10001; /* 確保在Modal之上 */
+  z-index: 10001;
 }
 
 .close-button:hover {
@@ -243,7 +243,7 @@
   }
 }
 
-/* Modal 標題 - 柔和發光 */
+
 .project-modal-content h1 {
   color: #4dd0e1;
   font-size: 32px;
@@ -252,7 +252,7 @@
   text-align: center;
 }
 
-/* 分隔線 - 靜態漸變 */
+
 .project-modal-content hr {
   border: none;
   height: 2px;
@@ -267,7 +267,7 @@
   opacity: 0.8;
 }
 
-/* 連結樣式 - 青綠色調 */
+
 .project-modal-content p {
   color: #b3e5fc;
   font-size: 18px;
@@ -294,7 +294,7 @@
   transform: translateY(-1px);
 }
 
-/* Markdown 內容樣式 - 護眼配色 */
+
 .rich-text.markdown-body {
   color: #ffffff;
   font-size: 16px;
@@ -356,7 +356,7 @@
   color: #ffffff;
 }
 
-/* 響應式設計 */
+
 @media (max-width: 768px) {
   .projects-container {
     padding: 30px 15px;

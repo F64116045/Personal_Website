@@ -1,4 +1,3 @@
-/* ✅ CSS 變數定義 */
 :root {
   --toc-primary-cyan: #3fb8cc;
   --toc-accent-blue: #2563eb;
@@ -13,7 +12,7 @@
   --toc-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ✅ 主容器樣式 */
+
 .toc {
   overflow-y: auto;
   overflow-x: hidden;
@@ -24,7 +23,7 @@
   border: 1px solid var(--toc-border-glow);
   border-radius: 12px;
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); /* Safari 支援 */
+  -webkit-backdrop-filter: blur(8px); 
   box-shadow: var(--toc-shadow-glow);
   transition: var(--toc-transition);
   position: relative;
@@ -38,7 +37,7 @@
     0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ✅ 標題樣式 */
+
 .toc-title {
   font-size: 1.25rem;
   font-weight: 700;
@@ -62,7 +61,7 @@
   border-radius: 1px;
 }
 
-/* ✅ 列表容器 */
+
 .toc-list {
   list-style: none;
   margin: 0;
@@ -70,7 +69,7 @@
   position: relative;
 }
 
-/* ✅ 項目樣式 */
+
 .toc-item {
   margin: 0.3rem 0;
   position: relative;
@@ -79,7 +78,7 @@
   transition: var(--toc-transition);
 }
 
-/* ✅ 連結按鈕樣式 */
+
 .toc-link {
   display: block;
   width: 100%;
@@ -106,14 +105,14 @@
   outline-offset: 2px;
 }
 
-/* ✅ 文字容器 */
+
 .toc-text {
   display: block;
   position: relative;
   z-index: 1;
 }
 
-/* ✅ Hover 效果 */
+
 .toc-item:hover .toc-link {
   background: var(--toc-bg-hover);
   color: var(--toc-primary-cyan);
@@ -121,7 +120,7 @@
   transform: translateX(2px);
 }
 
-/* ✅ 啟用狀態 */
+
 .toc-item.active .toc-link {
   background: var(--toc-bg-active);
   color: #0a0a0a;
@@ -133,7 +132,7 @@
   transform: translateX(4px);
 }
 
-/* ✅ 啟用狀態的視覺指示器 */
+
 .toc-item.active::before {
   content: '';
   position: absolute;
@@ -148,7 +147,7 @@
   animation: pulse-glow 2s infinite;
 }
 
-/* ✅ 脈動動畫 */
+
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 1;
@@ -160,7 +159,7 @@
   }
 }
 
-/* ✅ 各層級縮排優化 */
+
 .toc-item.level-1 .toc-link { 
   padding-left: 0.5rem; 
   font-weight: 600;
@@ -196,7 +195,7 @@
   opacity: 0.6;
 }
 
-/* ✅ 層級視覺線條 */
+
 .toc-item.level-2::after,
 .toc-item.level-3::after,
 .toc-item.level-4::after,
@@ -223,7 +222,6 @@
 .toc-item.level-5::after { --indent-level: 3.5; }
 .toc-item.level-6::after { --indent-level: 4.5; }
 
-/* ✅ 滾動條美化 */
 .toc::-webkit-scrollbar {
   width: 6px;
 }
@@ -244,13 +242,13 @@
   box-shadow: 0 0 4px var(--toc-primary-cyan);
 }
 
-/* ✅ Firefox 滾動條 */
+
 .toc {
   scrollbar-width: thin;
   scrollbar-color: var(--toc-primary-cyan) rgba(255, 255, 255, 0.05);
 }
 
-/* ✅ 載入動畫 */
+
 .toc-loading {
   display: flex;
   justify-content: center;
@@ -275,7 +273,7 @@
   100% { transform: rotate(360deg); }
 }
 
-/* ✅ 空狀態樣式 */
+
 .toc-empty {
   text-align: center;
   color: var(--toc-text-secondary);
@@ -284,7 +282,7 @@
   opacity: 0.7;
 }
 
-/* ✅ 平板裝置適配 */
+
 @media (max-width: 1024px) {
   .toc {
     max-width: 280px;
@@ -296,7 +294,7 @@
   }
 }
 
-/* ✅ 手機裝置適配 */
+
 @media (max-width: 768px) {
   .toc {
     position: fixed;
@@ -329,7 +327,7 @@
     border-radius: 0;
   }
   
-  /* 手機上簡化層級縮排 */
+
   .toc-item.level-1 .toc-link { padding-left: 0.5rem; }
   .toc-item.level-2 .toc-link { padding-left: 1rem; }
   .toc-item.level-3 .toc-link { padding-left: 1.5rem; }
@@ -337,7 +335,7 @@
   .toc-item.level-5 .toc-link { padding-left: 2.5rem; }
   .toc-item.level-6 .toc-link { padding-left: 3rem; }
   
-  /* 手機上移除層級線條 */
+
   .toc-item.level-2::after,
   .toc-item.level-3::after,
   .toc-item.level-4::after,
@@ -347,7 +345,7 @@
   }
 }
 
-/* ✅ 超小螢幕適配 */
+
 @media (max-width: 480px) {
   .toc {
     max-height: 40vh;
@@ -362,7 +360,7 @@
   .toc-item.level-1 .toc-link { font-size: 0.9rem; }
 }
 
-/* ✅ 深色模式優化 */
+
 @media (prefers-color-scheme: dark) {
   :root {
     --toc-text-primary: #e0f2fe;
@@ -371,7 +369,7 @@
   }
 }
 
-/* ✅ 高對比度模式 */
+
 @media (prefers-contrast: high) {
   .toc {
     border: 2px solid var(--toc-primary-cyan);
@@ -388,7 +386,7 @@
   }
 }
 
-/* ✅ 減少動畫偏好 */
+
 @media (prefers-reduced-motion: reduce) {
   .toc,
   .toc-link,

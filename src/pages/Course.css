@@ -1,4 +1,4 @@
-/* Course 頁面全局樣式 */
+
 .Course-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a75 0%, #1a1a2e71 50%, #16213e79 100%);
@@ -9,7 +9,7 @@
   margin: 0 auto;
 }
 
-/* 背景動態效果 */
+
 .Course-container::before {
   content: '';
   position: fixed;
@@ -37,7 +37,7 @@
   }
 }
 
-/* 頁面標題 */
+
 .course-text {
   font-size: 32px;
   font-weight: bold;
@@ -80,7 +80,7 @@
   50% { opacity: 1; }
 }
 
-/* 載入和空狀態樣式 */
+
 .Course-container p {
   color: #00ffff;
   font-size: 20px;
@@ -98,7 +98,7 @@
   50% { opacity: 1; }
 }
 
-/* 課程卡片樣式 */
+
 .class {
   background: linear-gradient(145deg, 
     rgba(0, 30, 60, 0.4), 
@@ -122,7 +122,7 @@
   font-weight: 500;
 }
 
-/* 課程卡片懸浮光線效果 */
+
 .class::before {
   content: '';
   position: absolute;
@@ -152,7 +152,7 @@
   color: #00ffff;
 }
 
-/* 課程成績樣式 */
+
 .class span {
   font-weight: bold;
   text-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
@@ -162,7 +162,7 @@
   border: 1px solid rgba(0, 200, 255, 0.3);
 }
 
-/* Modal 遮罩 */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -183,7 +183,7 @@
   to { opacity: 1; }
 }
 
-/* Modal 內容 */
+
 .modal-content {
   background: linear-gradient(145deg, 
     rgba(10, 20, 40, 0.95), 
@@ -217,7 +217,7 @@
   }
 }
 
-/* Modal 標題 */
+
 .modal-content h3 {
   color: #00ffff;
   font-size: 28px;
@@ -228,7 +228,7 @@
   border-image: linear-gradient(90deg, transparent, #00ffff, transparent) 1;
 }
 
-/* Modal 副標題 */
+
 .modal-content h4 {
   color: #00ff80;
   font-size: 20px;
@@ -236,7 +236,7 @@
 
 }
 
-/* Modal 段落 */
+
 .modal-content p {
   color: #b0e0e6;
   font-size: 16px;
@@ -248,7 +248,7 @@
   border-left: 3px solid rgba(0, 255, 255, 0.3);
 }
 
-/* Modal 連結 */
+
 .modal-content a {
   color: #00ffff !important;
   text-decoration: none !important;
@@ -269,7 +269,7 @@
   text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
 }
 
-/* Modal 關閉按鈕 */
+
 .modal-content button {
   background: linear-gradient(135deg, rgba(0, 40, 80, 0.8), rgba(0, 80, 120, 0.8));
   color: #00ffff;
@@ -301,7 +301,7 @@
   transform: translateY(-1px);
 }
 
-/* 響應式設計 */
+
 @media (max-width: 768px) {
   .Course-container {
     padding: 30px 15px;
@@ -391,7 +391,7 @@
   }
 }
 
-/* 滾動條美化 */
+
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }

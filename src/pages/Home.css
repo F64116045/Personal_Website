@@ -1,4 +1,3 @@
-/* Home 頁面全局樣式 */
 .home {
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a0a75 0%, #1a1a2e71 50%, #16213e79 100%);
@@ -14,9 +13,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 300%; /* 兩倍高度 */
+  height: 300%; 
   background: url('../img/HomeBackG.png') repeat center top;
-  background-size: 50 auto; /* 不是 over，要寫 cover */
+  background-size: 50 auto; 
   animation: scrollBackground 25s linear infinite;
   z-index: -1;
   opacity: 0.25;
@@ -32,7 +31,7 @@
   }
 }
 
-/* 主要內容區域 */
+
 main {
   padding: 40px 30px;
   max-width: 1200px;
@@ -41,7 +40,7 @@ main {
   z-index: 1;
 }
 
-/* 歡迎區域 - 跑馬燈效果（放慢速度，降低發光強度） */
+
 .welcome {
   text-align: center;
   margin-bottom: 60px;
@@ -61,25 +60,25 @@ main {
   letter-spacing: 2px;
   white-space: nowrap;
   line-height: 60px;
-  animation: marquee 25s linear infinite; /* 從15s改為25s，更慢 */
+  animation: marquee 25s linear infinite; 
 }
 
 .welcome-content1 {
   color: #00ffff;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4); /* 降低發光強度 */
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4); 
   animation-delay: 0s;
 }
 
 .welcome-content2 {
   color: #00ff80;
-  text-shadow: 0 0 8px rgba(0, 255, 128, 0.3); /* 降低發光強度 */
-  animation-delay: 8s; /* 調整延遲時間 */
+  text-shadow: 0 0 8px rgba(0, 255, 128, 0.3); 
+  animation-delay: 8s; 
 }
 
 .welcome-content3 {
   color: #0080ff;
-  text-shadow: 0 0 8px rgba(0, 128, 255, 0.3); /* 降低發光強度 */
-  animation-delay: 16s; /* 調整延遲時間 */
+  text-shadow: 0 0 8px rgba(0, 128, 255, 0.3); 
+  animation-delay: 16s; 
 }
 
 @keyframes marquee {
@@ -87,7 +86,7 @@ main {
   100% { transform: translateX(-100%); }
 }
 
-/* 圖標容器 */
+
 .iconContainer {
   display: flex;
   justify-content: center;
@@ -96,12 +95,11 @@ main {
   position: relative;
 }
 
-/* 圖標樣式（放大尺寸） */
 .icon {
-  width: 90px; /* 從60px增加到80px */
-  height: 90px; /* 從60px增加到80px */
+  width: 90px; 
+  height: 90px; 
   border-radius: 50%;
-  padding: 10px; /* 從8px增加到10px */
+  padding: 10px; 
   background: linear-gradient(45deg,rgba(119, 202, 244, 0.271), rgba(172, 200, 228, 0.106), rgba(119, 202, 244, 0.682));
   border: 2px solid transparent;
   background-clip: padding-box;
@@ -109,7 +107,7 @@ main {
   position: relative;
   z-index: 2;
   cursor: pointer;
-  /*animation: iconFloatSmooth 3s ease-in-out infinite;*/
+
 }
 
 .icon:hover {
@@ -146,7 +144,7 @@ main {
     transform: scale(1.2) rotate(720deg);
   }
 }
-/* 問候語容器 - 打字機效果（放慢速度，增大字體） */
+
 .greeting-container {
   text-align: center;
   margin: 80px 0;
@@ -177,7 +175,7 @@ main {
   51%, 100% { border-color: transparent; }
 }
 
-/* 文字區域 */
+
 .text {
   background: linear-gradient(135deg, rgba(0, 30, 60, 0.3), rgba(0, 60, 90, 0.3));
   backdrop-filter: blur(10px);
@@ -224,7 +222,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;         /* 垂直置中（上下方向） */
+  align-items: center;        
   margin-bottom: 15px;
   line-height: 1.8;
   font-size: 18px;
@@ -247,7 +245,7 @@ main {
   100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 聯繫區域 */
+
 .contact {
   background: linear-gradient(135deg, rgba(0, 40, 80, 0.4), rgba(0, 80, 120, 0.4));
   backdrop-filter: blur(15px);
@@ -277,7 +275,7 @@ main {
   border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
-/* 頁腳 */
+
 footer {
   text-align: center;
   padding: 30px;
@@ -292,7 +290,7 @@ footer p {
   opacity: 0.8;
 }
 
-/* 響應式設計 */
+
 @media (max-width: 768px) {
   main {
     padding: 20px 15px;
@@ -307,12 +305,12 @@ footer p {
   }
   
   .icon {
-    width: 70px; /* 相應調整手機版圖標大小 */
+    width: 70px; 
     height: 70px;
   }
   
   .greeting {
-    font-size: 36px; /* 相應調整手機版字體大小 */
+    font-size: 36px;
   }
   
   .text {
@@ -353,12 +351,12 @@ footer p {
   }
   
   .icon {
-    width: 60px; /* 相應調整小螢幕版圖標大小 */
+    width: 60px;
     height: 60px;
   }
   
   .greeting {
-    font-size: 28px; /* 相應調整小螢幕版字體大小 */
+    font-size: 28px; 
   }
   
   .text {

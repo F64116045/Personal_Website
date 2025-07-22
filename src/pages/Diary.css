@@ -1,4 +1,4 @@
-/* 主頁區塊 */
+
 .Diary-page {
   max-width: 900px;
   margin: 2rem auto;
@@ -13,7 +13,7 @@
   color: var(--primary-cyan);
 }
 
-/* 卡片清單 */
+
 .Diarys {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -43,7 +43,7 @@
   color: var(--primary-cyan);
 }
 
-/* Modal 遮罩 - 固定定位 */
+
 .diary-modal-overlay {
   position: fixed;
   top: 0;
@@ -59,13 +59,13 @@
   animation: fadeIn 0.3s ease-in-out;
   padding: 2vh 2vw;
   box-sizing: border-box;
-  overflow: hidden; /* 防止背景滾動 */
+  overflow: hidden; 
 }
 
-/* Modal 內容 - 固定高度 */
+
 .diary-modal-content {
   width: min(90vw, 1200px);
-  height: min(90vh, 800px); /* 固定高度，避免跳動 */
+  height: min(90vh, 800px); 
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.062);
@@ -75,22 +75,22 @@
   box-shadow: 0 0 30px var(--border-glow);
   position: relative;
   backdrop-filter: blur(10px);
-  overflow: hidden; /* 防止內容溢出 */
+  overflow: hidden; 
   box-sizing: border-box;
 }
 
-/* Modal 標題 - 固定高度 */
+
 .diary-modal-content h1 {
   margin: 0 2rem 1rem 0;
   color: var(--primary-cyan);
   font-size: 1.8rem;
-  flex-shrink: 0; /* 防止標題被壓縮 */
+  flex-shrink: 0; 
   line-height: 1.2;
   height: auto;
   min-height: 2.2rem;
 }
 
-/* 關閉按鈕 */
+
 .close-button {
   position: absolute;
   top: 1rem;
@@ -114,37 +114,37 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Modal 內部排版 - 關鍵修正 */
+
 .diary-modal-layout {
-  flex: 1; /* 佔用剩餘空間 */
+  flex: 1; 
   display: flex;
-  min-height: 0; /* 重要：允許 flex 子元素縮小 */
+  min-height: 0; 
   gap: 2rem;
   padding-top: 1rem;
-  overflow: hidden; /* 防止整體溢出 */
+  overflow: hidden; 
 }
 
-/* TOC 區域 */
+
 .toc {
-  flex-shrink: 0; /* 防止 TOC 被壓縮 */
+  flex-shrink: 0; 
   overflow-y: auto;
-  /* TOC 的具體樣式由你已有的 CSS 處理 */
+
 }
 
-/* Markdown 內容 - 關鍵修正 */
+
 .markdown-content {
   flex: 1;
-  min-width: 0; /* 防止內容撐開容器 */
+  min-width: 0; 
   overflow-y: auto;
   overflow-x: hidden;
   line-height: 1.6;
   padding-right: 0.5rem;
-  /* 確保滾動條樣式 */
+
   scrollbar-width: thin;
   scrollbar-color: var(--accent-blue) transparent;
 }
 
-/* 自定義滾動條 */
+
 .markdown-content::-webkit-scrollbar {
   width: 6px;
 }
@@ -162,7 +162,7 @@
   background: var(--primary-cyan);
 }
 
-/* Markdown 元素樣式 */
+
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3 {
@@ -235,7 +235,7 @@
   background: rgba(20, 30, 48, 0.3);
   border-radius: 6px;
   overflow: hidden;
-  table-layout: fixed; /* 防止表格撐開容器 */
+  table-layout: fixed; 
 }
 
 .markdown-content th, 
@@ -270,13 +270,13 @@
   margin: 1rem 0;
 }
 
-/* LaTeX 顯示（KaTeX） */
+
 .katex {
   font-size: 1rem;
   color: #ffffff;
 }
 
-/* 響應式設計 */
+
 @media (max-width: 768px) {
   .diary-modal-overlay {
     padding: 1vh 1vw;
@@ -335,19 +335,19 @@
   }
 }
 
-/* 防止背景滾動 */
+
 body.modal-open {
   overflow: hidden;
 }
 
-/* 加載動畫 */
+
 @keyframes blink {
   0% { opacity: 1; }
   50% { opacity: 0.2; }
   100% { opacity: 1; }
 }
 
-/* Modal 淡入動畫 */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.98); }
   to { opacity: 1; transform: scale(1); }

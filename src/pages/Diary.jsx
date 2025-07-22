@@ -8,7 +8,7 @@ import remarkMath from 'remark-math';
 import rehypeSlug from 'rehype-slug';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
-import LoadingScreen from '../component/LoadingScreen'; // 若有 loading 畫面
+import LoadingScreen from '../component/LoadingScreen'; 
 
 export function Diary_modal({ selectedDiary, setSelectedDiary }) {
     const [shouldRender, setShouldRender] = useState(false);
@@ -20,7 +20,7 @@ export function Diary_modal({ selectedDiary, setSelectedDiary }) {
         ? selectedDiary.Diary_content
         : '';
 
-    // 控制是否顯示 loading
+
     useEffect(() => {
         if (!selectedDiary) return;
         setShouldRender(false);
@@ -28,11 +28,11 @@ export function Diary_modal({ selectedDiary, setSelectedDiary }) {
         return () => clearTimeout(timer);
     }, [selectedDiary]);
 
-    // 抓 headings
+
     useEffect(() => {
         if (!shouldRender) return;
         const timer = setTimeout(() => {
-        const result = getRenderedHeadings(); // 根據渲染後的 DOM 擷取
+        const result = getRenderedHeadings(); 
         setHeadings(result);
         }, 100);
         return () => clearTimeout(timer);

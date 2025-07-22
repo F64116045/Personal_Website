@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import './MarkdownTOC.css';
 
-// ✅ 配置選項
+
 const DEFAULT_CONFIG = {
     containerSelector: '.markdown-content',
     headingSelector: 'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]',
     katexSelector: '.katex',
     observerOptions: {
-        rootMargin: '-10% 0px -70% 0px', // 調整觸發區域
+        rootMargin: '-10% 0px -70% 0px',
         threshold: [0, 0.1, 0.3, 0.5],
     },
     scrollBehavior: {
@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
     },
 };
 
-// ✅ 從畫面中實際渲染的 markdown DOM 抓標題（優化版）
+
 export function getRenderedHeadings(config = {}) {
     const {
         containerSelector = DEFAULT_CONFIG.containerSelector,
@@ -74,8 +74,7 @@ export function getRenderedHeadings(config = {}) {
     }
 }
 
-// ✅ 修正的 IntersectionObserver Hook
-// 修正版本的 useActiveHeader 函數
+
 export function useActiveHeader(headings, config = {}) {
     const [activeId, setActiveId] = useState(null);
     const observerRef = useRef(null);
@@ -87,7 +86,7 @@ export function useActiveHeader(headings, config = {}) {
         observerOptions = DEFAULT_CONFIG.observerOptions,
     } = config;
 
-    // 處理交集變化的回調函數
+
     const handleIntersection = useCallback((entries) => {
         if (isScrollingRef.current) return;
 
@@ -109,7 +108,7 @@ export function useActiveHeader(headings, config = {}) {
         }
     }, []);
 
-    // 監聽滾動事件
+
     useEffect(() => {
         const container = document.querySelector(containerSelector);
         if (!container) return;
@@ -137,7 +136,7 @@ export function useActiveHeader(headings, config = {}) {
     }, [containerSelector]);
 
     useEffect(() => {
-        // 清理舊的觀察器
+
         if (observerRef.current) {
         observerRef.current.disconnect();
         }
@@ -147,21 +146,21 @@ export function useActiveHeader(headings, config = {}) {
         return;
         }
 
-        // 🔥 關鍵修正：找到實際的滾動容器
+
         const scrollContainer = document.querySelector(containerSelector);
         if (!scrollContainer) {
         return;
         }
 
         try {
-        // 🔥 重要：設置 root 為實際的滾動容器，而不是 viewport
+
         observerRef.current = new IntersectionObserver(handleIntersection, {
-            root: scrollContainer, // 👈 這裡是關鍵修正
+            root: scrollContainer,
             rootMargin: observerOptions.rootMargin,
             threshold: observerOptions.threshold,
         });
 
-        // 觀察所有標題元素
+
         const validElements = headings
             .map(h => h.element || document.getElementById(h.id))
             .filter(Boolean);
@@ -189,7 +188,7 @@ export function useActiveHeader(headings, config = {}) {
     return activeId;
 }
 
-// ✅ 優化的目錄元件
+
 export function TOC({ 
     headings = [], 
     activeId, 
@@ -204,7 +203,7 @@ export function TOC({
     
     const { scrollBehavior = DEFAULT_CONFIG.scrollBehavior } = config;
 
-    // 清理無效的引用
+
     useEffect(() => {
         const currentIds = new Set(headings.map(h => h.id));
         Object.keys(tocRefs.current).forEach(id => {
@@ -214,7 +213,7 @@ export function TOC({
         });
     }, [headings]);
 
-    // 自動滾動到活躍項目 - 減少頻率
+
     useEffect(() => {
         if (!activeId || !tocRefs.current[activeId] || !containerRef.current || isClickScrollingRef.current) {
         return;
@@ -245,16 +244,16 @@ export function TOC({
         } catch (error) {
             console.error('自動滾動時發生錯誤:', error);
         }
-        }, 100); // 延遲執行
+        }, 100);
 
         return () => clearTimeout(timer);
     }, [activeId]);
 
-    // 處理點擊事件
+ 
     const handleItemClick = useCallback((heading, event) => {
         event.preventDefault();
         
-        // 設置點擊滾動狀態
+
         isClickScrollingRef.current = true;
         
         try {
@@ -270,12 +269,12 @@ export function TOC({
         if (targetElement) {
             targetElement.scrollIntoView(scrollBehavior);
             
-            // 重置點擊滾動狀態
+
             setTimeout(() => {
             isClickScrollingRef.current = false;
             }, 1000);
             
-            // 更新 URL hash
+
             if (window.history && window.history.pushState) {
             const url = new URL(window.location);
             url.hash = heading.id;
@@ -339,7 +338,7 @@ export function TOC({
     );
 }
 
-// ✅ 簡化的 AutoTOC 元件
+
 export function AutoTOC({ 
     config = {},
     className = '',
@@ -350,10 +349,10 @@ export function AutoTOC({
     const [headings, setHeadings] = useState([]);
     const lastUpdateRef = useRef(0);
 
-    // 節流的刷新函數
+
     const refreshHeadings = useCallback(() => {
         const now = Date.now();
-        if (now - lastUpdateRef.current < 200) return; // 最小間隔 200ms
+        if (now - lastUpdateRef.current < 200) return; 
         
         lastUpdateRef.current = now;
         
@@ -373,13 +372,13 @@ export function AutoTOC({
         }
     }, [config]);
 
-    // 初始化
+
     useEffect(() => {
         const timer = setTimeout(refreshHeadings, 100);
         return () => clearTimeout(timer);
     }, [refreshHeadings]);
 
-    // 簡化的 DOM 監聽 - 只監聽重要變化
+
     useEffect(() => {
         const targetNode = document.querySelector(config.containerSelector || DEFAULT_CONFIG.containerSelector);
         if (!targetNode) return;
