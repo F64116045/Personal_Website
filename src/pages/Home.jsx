@@ -55,11 +55,11 @@ const Home = () => {
           <p>在大學期間逐漸發現自己對於CS領域有興趣</p>
           <p>目前正積極學習軟體開發相關知識</p>
           <p>近期開始關注一些 AI 工具與 LLM 的應用</p>
-          <p>對底層系統設計、效能優化以及大型系統的可靠性維護等課題也很感興趣</p>
+          <p>目前正在關注 Model Context Protocol(MCP), Agent Development Kit(ADK) , Semantic Kernal</p>
         </section>
 
         <section className="contact">
-          <h3>聯繫我</h3>
+          <h3>寄信給我</h3>
           <p>F64116045@gs.ncku.edu.tw</p>
         </section>
       </main>
